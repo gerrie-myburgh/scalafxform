@@ -164,5 +164,14 @@ Implements drag and drop (verify this).
 ## Current Version
 The current version is 0.0.0 dev
 
+## Dependencies
+1. Java 11
+2. JavaFX 11
+3. scala 3
+4. org.json.json
+5. com.miglayout.miglayout-javafx
+
 ## Usage
+This library is not ready for general usage.
+
 
