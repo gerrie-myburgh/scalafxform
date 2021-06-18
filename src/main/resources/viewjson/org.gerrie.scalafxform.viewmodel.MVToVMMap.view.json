@@ -1,0 +1,64 @@
+{
+    "node": {
+        "id": "LAYOUT",
+        "type": "MIGLAYOUT",
+        "label": "Display to MAP",
+        "layout":" :: :: ",
+        "children": [
+            {
+                "DisplayTo": {
+                    "view": "node",
+                    "vm": "tree.form.node"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayTree",
+                    "vm": "tree.form.DisplayTree"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayRadioGroup",
+                    "vm": "tree.form.DisplayRadioGroup"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayRadio",
+                    "vm": "tree.form.DisplayRadio"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayBoolean",
+                    "vm": "tree.form.DisplayBoolean"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayText",
+                    "vm": "tree.form.DisplayText"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayList",
+                    "vm": "tree.form.DisplayList"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayComboBox",
+                    "vm": "tree.form.DisplayComboBox"
+                }
+            },
+            {
+                "DisplayTo": {
+                    "view": "DisplayClassMembers",
+                    "vm": "DisplayClassMembers"
+                }
+            }
+        ]
+    }
+}

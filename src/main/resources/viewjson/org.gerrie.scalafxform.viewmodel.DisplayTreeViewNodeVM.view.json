@@ -1,0 +1,48 @@
+{
+    "node": {
+        "id": "LAYOUT",
+        "type": "MIGLAYOUT",
+        "label": "Test",
+        "layout":"wrap 2:: :: ",
+        "children": [
+            {
+                "node": {
+                    "id": "GROUP",
+                    "type": "COMPONENT",
+                    "label": "",
+                    "layout":" :: :: ",
+                    "children": [
+                        {
+                            "DisplayRadioGroup": {
+                                "label": "",
+                                "field": "id",
+                                "layout":" :: :: "
+                            }
+                        },
+                        {
+                            "DisplayComboBox": {
+                                "label": "Type",
+                                "field": "type",
+                                "layout":" :: :: "
+                            }
+                        },
+                        {
+                            "DisplayText": {
+                                "label": "Label",
+                                "field": "label",
+                                "layout":" :: :: "
+                            }
+                        },
+                        {
+                            "DisplayText": {
+                                "label": "MiG Layout",
+                                "field": "layout",
+                                "layout":" :: :: "
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
