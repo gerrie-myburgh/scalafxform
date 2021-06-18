@@ -183,30 +183,37 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
                     .filter(field => classOf[MV].isAssignableFrom(field.getType) ||
                                      classOf[VM].isAssignableFrom(field.getType))
                     .map(field=>
-                        // TODO to load a VM node from the class requires some thought.... get back to this.
+                        val member = 
+                        if classOf[MV].isAssignableFrom(field.getType) then
+                            // create a tree item for every selectable item
+                            // do not create a form bean for the node as this 
+                            // will come from the target tree
+                            val treeItem = TreeItem[Tree | LeafNode]()
+                            droppableItems(count) = treeItem
+                            val fieldName = field.getType().getName().replace("/",".")
+                            val beanVM = fieldName.split("""\.""").last
+                            val beanName = field.getName
+                            val view = Construct.newTreeNode(beanVM)()
 
-                        // create a tree item for every selectable item
-                        // do not create a form bean for the node as this 
-                        // will come from the target tree
-                        val treeItem = TreeItem[Tree | LeafNode]()
-                        droppableItems(count) = treeItem
-                        val fieldName = field.getType().getName().replace("/",".")
-                        val beanVM = fieldName.split("""\.""").last
-                        val beanName = field.getName
-                        val view = Construct.newTreeNode(beanVM)()
+                            // attach form bean to the leaf or tree node
+                            val fromBeanClassName = fieldName.split("""\.""").dropRight(1).mkString(".")
+                            val beanClassName = Construct.mvToVMMap(fromBeanClassName)(beanVM)
 
-                        // attach form bean to the leaf or tree node
-                        val fromBeanClassName = fieldName.split("""\.""").dropRight(1).mkString(".")
-                        val beanClassName = Construct.mvToVMMap(fromBeanClassName)(beanVM)
+                            view.formBeanName = fieldName
+                            view.field = field.getName()
 
-                        view.formBeanName = fieldName
-                        view.field = field.getName()
+                            treeItem.setValue(view)
+                            count += 1
 
-                        treeItem.setValue(view)
-                        count += 1
-
-                        // create a member instance that is to go into members list
-                        Member(DisplayText(field.getName), DisplayText(field.getType.getName)))
+                            // create a member instance that is to go into members list
+                            Member(DisplayText(field.getName), DisplayText(field.getType.getName))
+                        else if classOf[VM].isAssignableFrom(field.getType) then
+                            // create a member instance that is to go into members list
+                            Member(DisplayText(""), DisplayText("")) 
+                        else 
+                            null  // to keep cpmpiler happy
+                        member
+                    )
                     .toList
 
                 members.values(fieldMembers*)
