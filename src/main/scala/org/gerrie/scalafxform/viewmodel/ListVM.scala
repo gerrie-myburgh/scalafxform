@@ -19,6 +19,7 @@ import javafx.collections.ObservableList
 import java.util.Observable
 import javafx.beans.value.ObservableObjectValue
 import javafx.scene.control.Alert.AlertType
+import java.lang.reflect.Field
 
 
 /******************************************************************************
@@ -86,7 +87,7 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
     val classes         = DisplayComboBox[String]() 
     val members         = DisplayMemberList( () => Member() )   
     val classList       = mutable.ArrayBuffer[String]()
-    val droppableItems  = mutable.HashMap[Integer, TreeItem[Tree | LeafNode]]()
+    val droppableItems  = mutable.HashMap[Int, TreeItem[Tree | LeafNode]]()
     val droppedItems    = mutable.HashSet[TreeItem[Tree | LeafNode]]()
 
     override def getFieldName() = ""
@@ -152,10 +153,65 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
             droppedItems.remove(drop)
 
     /******************************************************************************
-    * listener for state change of combo box class items
+    * load the field value into a member instance
     */ 
+    def loadField(prepend : String , field : Field) =
+        val treeItem = TreeItem[Tree | LeafNode]()
+        droppableItems(droppableItems.size) = treeItem
+        val fieldName = field.getType().getName().replace("/",".")
+        val beanVM = fieldName.split("""\.""").last
+        val beanName = field.getName
+
+        val view = 
+        if Construct.newTreeNode.contains(beanVM) then
+            Construct.newTreeNode(beanVM)()
+        else
+            Construct.newTreeNode("node")()
+
+        if Construct.newTreeNode.contains(beanVM) then
+            view.formBeanName = Construct.mvToVMMap("org.gerrie.scalafxform.nodes")(s"${beanVM}")
+        else
+            view.formBeanName = Construct.mvToVMMap("org.gerrie.scalafxform.nodes")("DisplayTreeViewNode")
+        view.treeNodeDetailForm = Some(Construct.newVMBean(view.formBeanName))
+
+        val newFieldName = if prepend.isEmpty then beanName else s"${prepend}.${beanName}"
+        view.field = newFieldName
+        view.treeNodeDetailForm.get.asInstanceOf[FormVM].field.set( newFieldName )
+        treeItem.setValue(view)
+        // create a member instance that is to go into members list
+        Array(Member(DisplayText(newFieldName), DisplayText(field.getType().getName())))    
+
+    /******************************************************************************
+    * load the class definition into the list of members
+    * // TODO Prevend cycles in the loading of the sub VMs
+    */ 
+    def loadClassMembers(prepend : String, className : String) : Array[Member]= 
+        val clazz = Construct.getClass(className)
+        val fieldArray  = clazz.getDeclaredFields
+        fieldArray
+            .filter(field => classOf[MV].isAssignableFrom(field.getType) ||
+                             classOf[VM].isAssignableFrom(field.getType))
+            .flatMap(field=>
+                val typeName = field.getType().getName()
+                val fieldName = field.getName()
+                val member = 
+                    if classOf[MV].isAssignableFrom(field.getType) then
+                        // create a leaf item for every selectable item
+                        loadField(prepend, field)
+                    else if classOf[VM].isAssignableFrom(field.getType) then
+                        // create a tree instance that is to go into members list
+                        val newPrepend = if prepend.isEmpty then fieldName else s"$prepend.${fieldName}"
+                        loadField(newPrepend, field) ++ loadClassMembers(prepend, typeName)
+                    else 
+                        Array[Member]()  // to keep compiler happy
+                member
+            )
+
     info(s"Add listner to ListVM.classes.")
 
+    /******************************************************************************
+    * listener for state change of combo box class items
+    */ 
     classes.getControl()(0)
         .asInstanceOf[ComboBox[String]]
         .valueProperty()
@@ -163,7 +219,7 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
             // if the tree is diry the inform the user that this is the case
             if dropTarget.isDefined && dropTarget.get.tree.dirty then 
                 val alert = Alert(AlertType.CONFIRMATION)
-                alert.setContentText("""View layout has changed. Do you want to save?""")
+                alert.setContentText("View layout has changed. Do you want to save?")
                 val result = alert.showAndWait()
                 dropTarget.get.tree.dirty = false
                 
@@ -178,40 +234,21 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
                 val clazz = Construct.getClass(className)
                 val fieldArray  = clazz.getDeclaredFields
                 members.getControl()(0).asInstanceOf[TableView[Member]].getItems().clear()
-                var count = 0
                 val fieldMembers = fieldArray
                     .filter(field => classOf[MV].isAssignableFrom(field.getType) ||
                                      classOf[VM].isAssignableFrom(field.getType))
-                    .map(field=>
+                    .flatMap(field=>
+                        val typeName = field.getType().getName()
+                        val fieldName = field.getName()
                         val member = 
                         if classOf[MV].isAssignableFrom(field.getType) then
                             // create a tree item for every selectable item
-                            // do not create a form bean for the node as this 
-                            // will come from the target tree
-                            val treeItem = TreeItem[Tree | LeafNode]()
-                            droppableItems(count) = treeItem
-                            val fieldName = field.getType().getName().replace("/",".")
-                            val beanVM = fieldName.split("""\.""").last
-                            val beanName = field.getName
-                            val view = Construct.newTreeNode(beanVM)()
-
-                            // attach form bean to the leaf or tree node
-                            val fromBeanClassName = fieldName.split("""\.""").dropRight(1).mkString(".")
-                            val beanClassName = Construct.mvToVMMap(fromBeanClassName)(beanVM)
-
-                            view.formBeanName = fieldName
-                            view.field = field.getName()
-
-                            treeItem.setValue(view)
-                            count += 1
-
-                            // create a member instance that is to go into members list
-                            Member(DisplayText(field.getName), DisplayText(field.getType.getName))
+                            loadField("",field)
                         else if classOf[VM].isAssignableFrom(field.getType) then
                             // create a member instance that is to go into members list
-                            Member(DisplayText(""), DisplayText("")) 
+                            loadField("", field) ++ loadClassMembers(fieldName,typeName)
                         else 
-                            null  // to keep cpmpiler happy
+                            Array[Member]()  // to keep compiler happy
                         member
                     )
                     .toList
@@ -258,13 +295,14 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
             val index = row.getIndex()
             // make sure the target exist and there are items available to be dropped
             if dropTarget.isDefined && !droppedItems.contains(droppableItems(index)) then
+                println(s"DRAG START ${droppableItems(index)}")
                 dropTarget.get.draggedItem = Some(droppableItems(index))
                 dropTarget.get.draggedFormBean = droppableItems(index).getValue().treeNodeDetailForm
                 droppableItems(index).getValue().treeNodeDetailForm = None
                 
                 val db = row.startDragAndDrop(TransferMode.MOVE)
                 val content = ClipboardContent()
-                content.put(Single.SERIALIZED_MIME_TYPE, dropTarget.get.draggedItem.get.getValue())
+                content.put(Single.SERIALIZED_MIME_TYPE, 0)
                 db.setContent(content)
             else
                 dropTarget.get.draggedItem = None

@@ -48,7 +48,7 @@ private class DisplayComponentTree(var respondToVM : Option[DisplayClassMembersL
         if itemToRemove.isDefined && respondToVM.isDefined && 
             itemToRemove.get.getParent() != null && 
             respondToVM.get.isDroppedItem(itemToRemove.get) then
-            itemToRemove.get.getParent().getChildren().remove(itemToRemove)
+            itemToRemove.get.getParent().getChildren().remove(itemToRemove.get)
             respondToVM.get.removedFromTarget(itemToRemove.get)
             getTree().refresh()
             // align the tree with the treeview layout
@@ -136,7 +136,8 @@ class DisplayTreeViewComponentsVM(private var respondToVM : Option[DisplayClassM
             val db = treeCell.startDragAndDrop(TransferMode.MOVE)
 
             val content = new ClipboardContent()
-            content.put(Single.SERIALIZED_MIME_TYPE, draggedItem.get.getValue())
+            //content.put(Single.SERIALIZED_MIME_TYPE, draggedItem.get.getValue())
+            content.put(Single.SERIALIZED_MIME_TYPE, 0)
             db.setContent(content)
             db.setDragView(treeCell.snapshot(null, null))
             event.consume()

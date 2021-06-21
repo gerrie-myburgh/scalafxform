@@ -19,7 +19,7 @@ trait Constraint
  * base of all view models. This is for a vm that does not have a label, 
  * field or layout
  */
-trait VM:
+trait VM extends Serializable:
     /** Make a copy of the VM
      */
     def makeCopy() : VM
@@ -30,7 +30,7 @@ trait VM:
 /******************************************************************************
  * base of all form vieww models
  */
-trait FormVM extends Serializable with VM:
+trait FormVM extends VM:
     val label = DisplayText("")
     // TODO investigate if the field should not move to VM.
     val field = DisplayLabel("")
