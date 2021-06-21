@@ -1,4 +1,4 @@
-val scala3Version = "3.0.0-RC3"
+val scala3Version = "3.0.1-RC1"
 
 lazy val root = project
   .in(file("."))
@@ -9,6 +9,7 @@ lazy val root = project
     scalaVersion := scala3Version,
 
     libraryDependencies += "javax.validation" % "validation-api" % "2.0.1.Final",
+    libraryDependencies += "org.hibernate.validator" % "hibernate-validator" % "7.0.1.Final",
     libraryDependencies += "com.github.sbt" % "junit-interface" % "0.13.2",
     libraryDependencies += "org.json" % "json" % "20210307",
     libraryDependencies += "com.miglayout" % "miglayout-javafx" % "11.0",
