@@ -1,0 +1,41 @@
+{
+    "node": {
+        "id": "LAYOUT",
+        "type": "MIGLAYOUT",
+        "label": "Test",
+        "layout":" :: :: ",
+        "children": [
+            {
+                "node": {
+                    "id": "GROUP",
+                    "type": "COMPONENT",
+                    "label": "",
+                    "layout":" :: :: ",
+                    "children": [
+                        {
+                            "DisplayLabel": {
+                                "label": "Field",
+                                "field": "field",
+                                "layout":"wrap"
+                            }
+                        },
+                        {
+                            "DisplayText": {
+                                "label": "Label",
+                                "field": "label",
+                                "layout":"wrap"
+                            }
+                        },
+                        {
+                            "DisplayText": {
+                                "label": "MIG Layout",
+                                "field": "layout",
+                                "layout": "wrap"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

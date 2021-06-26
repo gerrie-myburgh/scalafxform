@@ -295,7 +295,7 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
             val index = row.getIndex()
             // make sure the target exist and there are items available to be dropped
             if dropTarget.isDefined && !droppedItems.contains(droppableItems(index)) then
-                println(s"DRAG START ${droppableItems(index)}")
+
                 dropTarget.get.draggedItem = Some(droppableItems(index))
                 dropTarget.get.draggedFormBean = droppableItems(index).getValue().treeNodeDetailForm
                 droppableItems(index).getValue().treeNodeDetailForm = None

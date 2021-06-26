@@ -23,8 +23,15 @@ case class ControlGroup(
 class AbsNode:
     var formBeanName = ""
     var field        = ""
-    var treeNodeDetailForm : Option[VM] = None
+    private var _treeNodeDetailForm : Option[VM] = None
     var parent : Option[AbsNode] = None
+
+    def treeNodeDetailForm = _treeNodeDetailForm
+    def treeNodeDetailForm_=(aTreeNodeDetailForm : Option[VM]) = 
+        if this.getClass().getName().equals("org.gerrie.scalafxform.nodes.DisplayTextView")
+           &&  aTreeNodeDetailForm.get.getClass().getName().equals("org.gerrie.scalafxform.viewmodel.DisplayRadioGroupVM") then
+            println("STOP...INCORRECT...")
+        _treeNodeDetailForm=aTreeNodeDetailForm
 
 /******************************************************************************
  * leaf node definition

@@ -72,5 +72,6 @@ object Construct:
         "org.gerrie.scalafxform.viewmodel.DisplayClassMembersListVM.view.json",
         "org.gerrie.scalafxform.viewmodel.MVToVMMap.view.json",
         "org.gerrie.scalafxform.viewmodel.DisplayTreeViewComponentsVM.view.json",
-        "org.gerrie.scalafxform.viewmodel.DisplayTreeViewNodeVM.view.json"
+        "org.gerrie.scalafxform.viewmodel.DisplayTreeViewNodeVM.view.json",
+        "org.gerrie.scalafxform.viewmodel.DisplayListVM.view.json"
     )

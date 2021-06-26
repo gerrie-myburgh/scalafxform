@@ -35,18 +35,12 @@ object Layout extends Logs:
         info(s"Format ${vmName}.")
 
         if Load.views.contains(vmName) then
-            if Load.views.contains(vmName) then
-                val viewDef = Load.views(vmName)
-                doLayoutOfBean(viewDef, controls, constraints, parentPane).getPane()
-            else 
-                val msg = s"${vmName} is not in the views keys."
-                error( msg )
-                throw Exception(msg) 
-                null
-        else
-            val msg = s"${vmName}.view.json not one of the views."
+            val viewDef = Load.views(vmName)
+            doLayoutOfBean(viewDef, controls, constraints, parentPane).getPane()
+        else 
+            val msg = s"${vmName} has not been loaded from a json definition."
             error( msg )
-            throw Exception(msg)
+            throw Exception(msg) 
             null
     /******************************************************************************
      * Use the view definition to do the form layout

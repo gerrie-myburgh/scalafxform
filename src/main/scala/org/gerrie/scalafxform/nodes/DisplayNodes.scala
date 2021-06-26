@@ -10,6 +10,7 @@ import javafx.scene.*
 import javafx.scene.layout.*
 import javafx.scene.text.Text;
 import javafx.scene.input.*
+import javafx.beans.value.*
 
 import org.gerrie.scalafxform.util.*
 import org.gerrie.scalafxform.layout.*
@@ -125,7 +126,7 @@ class DisplayTree() extends MV:
                 val fieldName = theChild.treeNodeDetailForm.get.getFieldName()
 
                 val newTreeItem = getTreeItem(fieldName, theChild)
-                newTreeItem.getValue().treeNodeDetailForm = theChild.treeNodeDetailForm
+                newTreeItem.getValue().treeNodeDetailForm = newTreeItem.getValue().treeNodeDetailForm
 
                 parent.getChildren().add(newTreeItem)
             case c if c.isInstanceOf[Tree] => 
@@ -434,7 +435,7 @@ class DisplayList[T <: VM]() extends MV:
             List(control)
 
     /************************************************************************** 
-     * Dislay the detail of the value T. This value is normally from the 
+     * Display the detail of the value T. This value is normally from the 
      * selected item getValue. The detail is showed in a modal form. 
      * If the status from the form is Apply and action is edit then replace selection 
      * If the status from the form is Apply and action is edit then replace selection 
@@ -618,6 +619,9 @@ class DisplayBoolean() extends MV:
      */
     def get() =
         prop.getValue()
+    
+    override def toString() = 
+        get().toString()
 /******************************************************************************
  * radio button input control
  */
@@ -689,6 +693,8 @@ class DisplayRadioGroup[T]() extends MV:
     def set(value : T) =
         controls(value).fire()
 
+    override def toString() =
+        get().toString()
 /******************************************************************************
  * display label
  */

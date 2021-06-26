@@ -31,6 +31,5 @@ import org.slf4j.*;
         stage.setScene(scene)
         stage.show()
   })
-  LOGGER.info("Program shutdown")
 
 val msg = "Nothing"
