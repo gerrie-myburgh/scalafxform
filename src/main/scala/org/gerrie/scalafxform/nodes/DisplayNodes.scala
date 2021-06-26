@@ -126,6 +126,8 @@ class DisplayTree() extends MV:
                 val fieldName = theChild.treeNodeDetailForm.get.getFieldName()
 
                 val newTreeItem = getTreeItem(fieldName, theChild)
+                // TODO ERROR - treeNodeDetailForm now have mo loaded detail. theChild have the detail in it.
+                newTreeItem.getValue().treeNodeDetailForm.get.asInstanceOf[FormVM].copy(theChild.treeNodeDetailForm.get.asInstanceOf[FormVM])
                 newTreeItem.getValue().treeNodeDetailForm = newTreeItem.getValue().treeNodeDetailForm
 
                 parent.getChildren().add(newTreeItem)

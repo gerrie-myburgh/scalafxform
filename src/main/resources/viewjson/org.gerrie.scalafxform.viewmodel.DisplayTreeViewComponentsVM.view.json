@@ -1,13 +1,11 @@
 {
   "node": {
-    "id": "LAYOUT",
     "type": "MIGLAYOUT",
     "label": "",
     "layout": "flowy, fill::fill::fill",
     "children": [
       {
         "node": {
-          "id": "GROUP",
           "type": "COMPONENT",
           "label": "",
           "layout": " :: :: ",

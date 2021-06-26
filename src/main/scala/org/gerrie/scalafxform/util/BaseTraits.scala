@@ -35,6 +35,13 @@ trait FormVM extends VM:
     // TODO investigate if the field should not move to VM.
     val field = DisplayLabel("")
     val layout = DisplayText("")
+    /** copy from the form then values to this
+     */
+    def copy(from : FormVM) =
+        field.set( from.field.get() )
+        label.set( from.label.get() )
+        layout.set( from.layout.get() )
+
 
 /******************************************************************************
  * base of panes onto which Nodes can be loaded on

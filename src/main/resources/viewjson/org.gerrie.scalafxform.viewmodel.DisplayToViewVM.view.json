@@ -1,13 +1,11 @@
 {
     "node": {
-        "id": "LAYOUT",
         "type": "MIGLAYOUT",
         "label": "Test",
         "layout": " :: :: ",
         "children": [
             {
                 "node": {
-                    "id": "GROUP",
                     "type": "COMPONENT",
                     "label": "",
                     "layout": " :: :: ",

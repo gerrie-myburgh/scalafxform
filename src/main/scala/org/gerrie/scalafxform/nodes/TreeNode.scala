@@ -18,15 +18,6 @@ class TreeViewNodeView() extends Tree with Logs:
     val errMsg = "treeNodeDetailForm is not defined in TreeViewNodeView"
 
     /************************************************************************** 
-     * get id from tree node detail form
-     */ 
-    def getId() = 
-        if treeNodeDetailForm != null && treeNodeDetailForm.isDefined then
-            treeNodeDetailForm.get.asInstanceOf[DisplayTreeViewNodeVM].id.get()
-        else
-            error( errMsg )
-            throw  Exception(errMsg) 
-    /************************************************************************** 
      * get type  from tree node detail form
      */ 
     def getType() = 
@@ -50,15 +41,6 @@ class TreeViewNodeView() extends Tree with Logs:
     def getLayout() : String = 
         if treeNodeDetailForm != null && treeNodeDetailForm.isDefined then
             treeNodeDetailForm.get.asInstanceOf[DisplayTreeViewNodeVM].layout.get()
-        else
-            error( errMsg )
-            throw  Exception(errMsg) 
-    /************************************************************************** 
-     * set id in tree node detail form
-     */ 
-    def setId(value : String) = 
-        if treeNodeDetailForm != null && treeNodeDetailForm.isDefined then
-            treeNodeDetailForm.get.asInstanceOf[DisplayTreeViewNodeVM].id.set(value)
         else
             error( errMsg )
             throw  Exception(errMsg) 
@@ -97,12 +79,11 @@ class TreeViewNodeView() extends Tree with Logs:
     /************************************************************************** 
      * save self to JSON string
      */ 
-    def toJSONStr() = s"""{"node" :{"id":"${getId()}","type":"${getType()}","label":"${getLabel()}","layout":"${getLayout()}","children":[\n${childrenToJSON()}]}}"""  
+    def toJSONStr() = s"""{"node" :{"type":"${getType()}","label":"${getLabel()}","layout":"${getLayout()}","children":[\n${childrenToJSON()}]}}"""  
     /************************************************************************** 
      * read self from JSON string
      */ 
     def fromJSON(json : JSONObject) =
-        setId(json.getString("id"))
         setType(json.getString("type"))
         setLabel(json.getString("label"))
         setLayout(json.getString("layout"))
@@ -117,4 +98,4 @@ class TreeViewNodeView() extends Tree with Logs:
      * to string override
      */ 
     override def toString() = 
-        s"${getId()} : ${getType()}"
+        s"${getType()}"

@@ -23,26 +23,21 @@ import javafx.beans.value.ObservableObjectValue
  * Tree node formVM, used to display/edit values associated with Tree
  */ 
 class DisplayTreeViewNodeVM extends FormVM:
-    val id = DisplayRadioGroup("LAYOUT", "GROUP")
     val `type` = DisplayComboBox("MIGLAYOUT")
 
     override def getFieldName() = field.get()
 
     def makeCopy()= 
         val aCopy= DisplayTreeViewNodeVM()
-        aCopy.id.set( id.get() )
         aCopy.`type`.set( `type`.get() )
         aCopy.label.set( label.get() )
         aCopy.layout.set( layout.get() )
         aCopy
 
-    val toggle = id.getToggle()
-    toggle.selectedToggleProperty().addListener( (ob, t0, t1) => 
-        if id.get().equals("GROUP") then 
-            `type`.getControl()(0).setDisable(true)
-        else     
-            `type`.getControl()(0).setDisable(false)
-    )
+    override def copy(from : FormVM) =
+        super.copy(from)
+        ()
+
 
 /******************************************************************************
  * Generic Tree node formVM, used to display/edit values associated with Tree
