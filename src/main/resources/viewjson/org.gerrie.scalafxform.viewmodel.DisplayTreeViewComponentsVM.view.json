@@ -5,19 +5,10 @@
     "layout": "flowy, fill::fill::fill",
     "children": [
       {
-        "node": {
-          "type": "COMPONENT",
+        "DisplayTree": {
           "label": "",
-          "layout": " :: :: ",
-          "children": [
-            {
-              "DisplayTree": {
-                "label": "",
-                "field": "tree",
-                "layout": "grow:: :: "
-              }
-            }
-          ]
+          "field": "tree",
+          "layout": "grow:: :: "
         }
       }
     ]

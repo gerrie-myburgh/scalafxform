@@ -2,36 +2,27 @@
     "node": {
         "type": "MIGLAYOUT",
         "label": "Test",
-        "layout":"wrap 2:: :: ",
+        "layout": "wrap 2:: :: ",
         "children": [
             {
-                "node": {
-                    "type": "COMPONENT",
-                    "label": "",
-                    "layout":" :: :: ",
-                    "children": [
-                        {
-                            "DisplayComboBox": {
-                                "label": "Type",
-                                "field": "type",
-                                "layout":" :: :: "
-                            }
-                        },
-                        {
-                            "DisplayText": {
-                                "label": "Label",
-                                "field": "label",
-                                "layout":" :: :: "
-                            }
-                        },
-                        {
-                            "DisplayText": {
-                                "label": "MiG Layout",
-                                "field": "layout",
-                                "layout":" :: :: "
-                            }
-                        }
-                    ]
+                "DisplayComboBox": {
+                    "label": "Type",
+                    "field": "type",
+                    "layout": " :: :: "
+                }
+            },
+            {
+                "DisplayText": {
+                    "label": "Label",
+                    "field": "label",
+                    "layout": " :: :: "
+                }
+            },
+            {
+                "DisplayText": {
+                    "label": "MiG Layout",
+                    "field": "layout",
+                    "layout": " :: :: "
                 }
             }
         ]

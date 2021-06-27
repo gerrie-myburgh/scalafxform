@@ -27,7 +27,6 @@ object Layout extends Logs:
      */
     def format( vmName : String, 
                 controls : Map[String, mutable.ArrayBuffer[ControlGroup]], 
-                constraints : mutable.ArrayBuffer[Constraint],
                 parentPane : Option[Pane] = None) =
 
         assert(!vmName.isEmpty && controls.size > 0)
@@ -36,7 +35,7 @@ object Layout extends Logs:
 
         if Load.views.contains(vmName) then
             val viewDef = Load.views(vmName)
-            doLayoutOfBean(viewDef, controls, constraints, parentPane).getPane()
+            doLayoutOfBean(viewDef, controls, parentPane).getPane()
         else 
             val msg = s"${vmName} has not been loaded from a json definition."
             error( msg )
@@ -48,7 +47,6 @@ object Layout extends Logs:
      */
     def doLayoutOfBean( viewNode : TreeViewNodeView, 
                         controls : Map[String, mutable.ArrayBuffer[ControlGroup]],
-                        constraints : mutable.ArrayBuffer[Constraint],
                         parentPane : Option[Pane]) =
         /** 
          * panes can be nested 
@@ -84,26 +82,19 @@ object Layout extends Logs:
 
         /** 
          * format all the children of the view model onto the given pane
-         * 
-         * // TODO nested components in the components map changes this drasticly...
-         *         The loading of the jar files will have to be looked at as well.
          */
         def formatChildren(viewModel : TreeViewNodeView, pane : TreePane) : Unit=
             val newLoad = viewModel.getNode(parentPane, viewModel.getLayout())
 
             viewModel.children.foreach(child =>
                 child match
-                case c if c.isInstanceOf[TreeViewNodeView]  =>  info(s"Format child pane having name ${c.formBeanName}")
+                case c if c.isInstanceOf[TreeViewNodeView]  =>  info(s"Format child pane.")
                                                         val layoutView = c.asInstanceOf[TreeViewNodeView]
                                                         val newLoad = viewModel.getNode(None,layoutView.getLayout())
                                                         pane.add(newLoad)
                                                         topLoad.push(newLoad)
                                                         formatChildren(layoutView, topLoad.top)
-
-                                                        if layoutView.getType().equals("CONSTRAINT-RADIO") then
-                                                            constraints += RadioButtonGroup(topLoad.top)
-
-                                                        topLoad.pop
+                                                        topLoad.pop()
                 case c if !c.isInstanceOf[TreeViewNodeView] =>  info(s"Format control ${c}.")
                                                         formatControl(c.asInstanceOf[LeafComponent], topLoad.top)
                 case _ => println("--FAIL--")
@@ -111,8 +102,15 @@ object Layout extends Logs:
  
         viewNode.children.foreach(child =>
             child match
-            case c if c.isInstanceOf[TreeViewNodeView]  => formatChildren(c.asInstanceOf[TreeViewNodeView], topLoad.top)
-            case c if !c.isInstanceOf[TreeViewNodeView] => formatControl(c.asInstanceOf[LeafComponent], topLoad.top)
+            case c if c.isInstanceOf[TreeViewNodeView]  => 
+                                                    val layoutView = c.asInstanceOf[TreeViewNodeView]
+                                                    val newLoad = layoutView.getNode(None,layoutView.getLayout())
+                                                    topLoad.top.add(newLoad)
+                                                    topLoad.push(newLoad)
+                                                    formatChildren(c.asInstanceOf[TreeViewNodeView], topLoad.top)
+                                                    topLoad.pop()
+            case c if !c.isInstanceOf[TreeViewNodeView] => 
+                                                    formatControl(c.asInstanceOf[LeafComponent], topLoad.top)
             case _ => println("--FAIL--")
         )
 

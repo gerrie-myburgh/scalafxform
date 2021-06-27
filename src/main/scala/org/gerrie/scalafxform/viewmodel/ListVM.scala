@@ -168,8 +168,6 @@ class DisplayClassMembersListVM( var dropTarget : Option[DisplayTreeViewComponen
         else
             Construct.newTreeNode("node")()
 
-        // TODO ERROR - the treeNodeDetailForm must contain the loaded data from view.json and it does not.
-        //              It is has empty values.
         if Construct.newTreeNode.contains(beanVM) then
             view.formBeanName = Construct.mvToVMMap("org.gerrie.scalafxform.nodes")(s"${beanVM}")
         else

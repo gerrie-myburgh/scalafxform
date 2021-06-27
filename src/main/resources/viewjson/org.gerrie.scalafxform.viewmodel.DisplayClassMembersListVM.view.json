@@ -5,26 +5,17 @@
         "layout":"flowy, fill::fill:: ",
         "children": [
             {
-                "node": {
-                    "type": "COMPONENT",
-                    "label": "",
-                    "layout":" :: :: ",
-                    "children": [
-                        {
-                            "DisplayComboBox": {
-                                "label": "Classes",
-                                "field": "classes",
-                                "layout":" :: :: "
-                            }
-                        },
-                        {
-                            "DisplayList": {
-                                "label": "Members",
-                                "field": "members",
-                                "layout":"grow:: :: "
-                            }
-                        }
-                    ]
+                "DisplayComboBox": {
+                    "label": "Classes",
+                    "field": "classes",
+                    "layout":" :: :: "
+                }
+            },
+            {
+                "DisplayList": {
+                    "label": "Members",
+                    "field": "members",
+                    "layout":"grow:: :: "
                 }
             }
         ]

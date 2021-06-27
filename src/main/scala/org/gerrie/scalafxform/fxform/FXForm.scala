@@ -25,9 +25,6 @@ case class FXForm[T](model : T) extends Logs:
     // map of control names -> list of nodes that the control has
     private val fieldControls = mutable.HashMap[String, mutable.ArrayBuffer[ControlGroup]]()
 
-    // the list of constraints that the form is subjected to
-    private val constraints   = mutable.ArrayBuffer[Constraint]()
-
     // name of model that this form is been constructed for
     private var modelName = ""
 
@@ -46,7 +43,7 @@ case class FXForm[T](model : T) extends Logs:
      * constraint on the nodes
      */
     private def constuctForm() : Node = 
-        Layout.format(modelName, fieldControls.toMap, constraints)
+        Layout.format(modelName, fieldControls.toMap)
 
     /************************************************************************** 
      * Get the field components of the model and if

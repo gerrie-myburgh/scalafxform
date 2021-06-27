@@ -44,8 +44,7 @@ class TestLayout:
         val controlGroup1 = ControlGroup() // i
         controlGroup1.control += TextField("field")
         val controls = Map("field" -> mutable.ArrayBuffer(controlGroup), "label" -> mutable.ArrayBuffer(controlGroup1)) // i
-        val constraints = mutable.ArrayBuffer[Constraint]() // o
-        val parentNode = Layout.format(vmName, controls, constraints)
+        val parentNode = Layout.format(vmName, controls)
 
         // there should only be 3 nodes as children of the parent pane
         assertEquals("There should only be 3 child nodes.", 3, parentNode.getChildren().size)
