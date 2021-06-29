@@ -91,6 +91,7 @@ object Layout extends Logs:
                 case c if c.isInstanceOf[TreeViewNodeView]  =>  info(s"Format child pane.")
                                                         val layoutView = c.asInstanceOf[TreeViewNodeView]
                                                         val newLoad = viewModel.getNode(None,layoutView.getLayout())
+                                                        newLoad.getPane().setStyle("-fx-border-color: black")
                                                         pane.add(newLoad)
                                                         topLoad.push(newLoad)
                                                         formatChildren(layoutView, topLoad.top)
@@ -105,6 +106,7 @@ object Layout extends Logs:
             case c if c.isInstanceOf[TreeViewNodeView]  => 
                                                     val layoutView = c.asInstanceOf[TreeViewNodeView]
                                                     val newLoad = layoutView.getNode(None,layoutView.getLayout())
+                                                    newLoad.getPane().setStyle("-fx-border-color: black")
                                                     topLoad.top.add(newLoad)
                                                     topLoad.push(newLoad)
                                                     formatChildren(c.asInstanceOf[TreeViewNodeView], topLoad.top)

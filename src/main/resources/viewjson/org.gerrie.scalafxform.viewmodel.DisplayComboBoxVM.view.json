@@ -5,33 +5,24 @@
         "layout":" :: :: ",
         "children": [
             {
-                "node": {
-                    "type": "COMPONENT",
-                    "label": "",
-                    "layout":" :: :: ",
-                    "children": [
-                        {
-                            "DisplayLabel": {
-                                "label": "Field",
-                                "field": "field",
-                                "layout":"wrap"
-                            }
-                        },
-                        {
-                            "DisplayText": {
-                                "label": "Label",
-                                "field": "label",
-                                "layout":" :: :: "
-                            }
-                        },
-                        {
-                            "DisplayText": {
-                                "label": "MIG Layout",
-                                "field": "layout",
-                                "layout": " :: :: "
-                            }
-                        }
-                    ]
+                "DisplayLabel": {
+                    "label": "Field",
+                    "field": "field",
+                    "layout":"wrap"
+                }
+            },
+            {
+                "DisplayText": {
+                    "label": "Label",
+                    "field": "label",
+                    "layout":"wrap:: :: "
+                }
+            },
+            {
+                "DisplayText": {
+                    "label": "MIG Layout",
+                    "field": "layout",
+                    "layout": " :: :: "
                 }
             }
         ]

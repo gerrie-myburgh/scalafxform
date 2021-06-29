@@ -54,6 +54,8 @@ final case class ControllerMain():
     @FXML
     private var inbed : AnchorPane         = null
     @FXML
+    var mnuRecent : Menu                   = null
+    @FXML
     private var detail : AnchorPane         = null
     @FXML
     private var classMembersPane : AnchorPane = null
@@ -70,24 +72,18 @@ final case class ControllerMain():
     def onNewClick( event : ActionEvent )  =
         ()
 
-    @FXML
-    def onJarOpenClick( event : ActionEvent )  =
-        // get jar file
-        val fileChooser = FileChooser()
-        fileChooser.setTitle("Open Jar File")
-        fileChooser.getExtensionFilters().addAll(
-                FileChooser.ExtensionFilter("Open View Model Jar File", "*.jar"))
+    def openJarFile( file : File ) : Unit =
+        if file != null then
+            val pathToFile = Paths.get(file.getAbsolutePath()).getParent()
+            // record as a recent opened file
+            RunConfig.addFileNameLoaded(file.toPath().toString(), mnuRecent, openJarFile _)
 
-        val fileName = fileChooser.showOpenDialog(inbed.getScene().getWindow())
-        val pathToFile = Paths.get(fileName.getAbsolutePath()).getParent()
-
-        if fileName != null then
-            // get jar entries
-            val jarFile = JarFile(fileName)
+            // get the classes form jar file
+            val jarFile = JarFile(file)
             val jarEntries = jarFile.entries()
 
             urlClassloader = URLClassLoader.newInstance(
-                Array[URL]( fileName.toURI.toURL ), 
+                Array[URL]( file.toURI.toURL ), 
                 getClass().getClassLoader())
 
             Construct.getClass.clear()
@@ -115,7 +111,18 @@ final case class ControllerMain():
             classMemberList.classes.items(classMemberList.classList.sortWith( _ < _ ).toList*) 
 
             viewTree.clear()
-            
+
+    @FXML
+    def onJarOpenClick( event : ActionEvent )  =
+        // get jar file
+        val fileChooser = FileChooser()
+        fileChooser.setTitle("Open Jar File")
+        fileChooser.getExtensionFilters().addAll(
+                FileChooser.ExtensionFilter("Open View Model Jar File", "*.jar"))
+
+        val file = fileChooser.showOpenDialog(inbed.getScene().getWindow())
+        
+        openJarFile(file)    
 
     @FXML
     def onSaveClick( event : ActionEvent )  = 

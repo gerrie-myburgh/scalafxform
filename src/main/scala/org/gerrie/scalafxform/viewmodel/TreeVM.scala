@@ -44,18 +44,28 @@ private class DisplayComponentTree(var respondToVM : Option[DisplayClassMembersL
      * canot remove the rott of the tree
      */
     override def delete() = 
+
+        def deleteChildrenOfTree(treeItem : TreeItem[Tree | LeafNode]) : Unit = 
+            treeItem match
+            case t if t.getChildren().size() >  0  => respondToVM.get.removedFromTarget(treeItem)
+                                                      t.getChildren()
+                                                      .toArray()
+                                                      .foreach( child => deleteChildrenOfTree(child.asInstanceOf[TreeItem[Tree | LeafNode]]) )
+            case t if t.getChildren().size() == 0  => respondToVM.get.removedFromTarget(treeItem)
+
         val itemToRemove = getSelection()  
         if itemToRemove.isDefined && respondToVM.isDefined && 
             itemToRemove.get.getParent() != null && 
             respondToVM.get.isDroppedItem(itemToRemove.get) then
             itemToRemove.get.getParent().getChildren().remove(itemToRemove.get)
-            respondToVM.get.removedFromTarget(itemToRemove.get)
+            deleteChildrenOfTree(itemToRemove.get)
             getTree().refresh()
             // align the tree with the treeview layout
             alignTree(getTree().getRoot())
 
-        else if itemToRemove != null && itemToRemove.get.getParent() != null then
+        else if itemToRemove != null && itemToRemove.isDefined && itemToRemove.get.getParent() != null then
             super.delete()
+            deleteChildrenOfTree(itemToRemove.get)
 
 
 /**************************************************************************

@@ -9,27 +9,37 @@ import javafx.stage._
 
 import org.gerrie.scalafxform.layout.*
 import org.gerrie.scalafxform.util.*
+import controller.* 
 
-import org.slf4j.*;
+import org.slf4j.*
 
-@main def hello: Unit = 
+@main def main() =
+    Application.launch(classOf[App])
 
-  val LOGGER = LoggerFactory.getLogger(getClass())
-  LOGGER.info("Program start")
+class App extends Application:
 
-  Platform.startup(() => {})
+  /************************************************************************** 
+   * start of application
+   */
+  override def start(stage : Stage) =
+    val LOGGER = LoggerFactory.getLogger(getClass())
+    Load.loadViews(Construct.viewFileNames)
 
-  Load.loadViews(Construct.viewFileNames)
+    val loader = FXMLLoader()
+    loader.setLocation(getClass().getResource("/form_main.fxml"))
+    val root = loader.load().asInstanceOf[javafx.scene.layout.VBox]
 
-  Platform.runLater(new Runnable(){
-      def run() =
-        val loader = FXMLLoader()
-        loader.setLocation(getClass().getResource("/form_main.fxml"))
-        val root = loader.load().asInstanceOf[javafx.scene.layout.VBox]
-        val scene = Scene(root)
-        val stage = Stage()
-        stage.setScene(scene)
-        stage.show()
-  })
+    val controller = loader.getController[ControllerMain]()
+    RunConfig.loadConfig(controller.mnuRecent, controller.openJarFile)
+
+    val scene = Scene(root)
+    stage.setScene(scene)
+    stage.show()
+  
+  /************************************************************************** 
+   * all cleanup actions
+   */
+  override def stop() = 
+    RunConfig.storeConfig()
 
 val msg = "Nothing"

@@ -28,10 +28,7 @@ class AbsNode:
 
     def treeNodeDetailForm = _treeNodeDetailForm
     def treeNodeDetailForm_=(aTreeNodeDetailForm : Option[VM]) = 
-        if this.getClass().getName().equals("org.gerrie.scalafxform.nodes.DisplayTextView")
-           &&  aTreeNodeDetailForm.get.getClass().getName().equals("org.gerrie.scalafxform.viewmodel.DisplayRadioGroupVM") then
-            println("STOP...INCORRECT...")
-        _treeNodeDetailForm=aTreeNodeDetailForm
+         _treeNodeDetailForm=aTreeNodeDetailForm
 
 /******************************************************************************
  * leaf node definition
@@ -42,6 +39,5 @@ abstract class LeafNode extends AbsNode with JSONView
  * Parent node definition, each parent node is a tree in itself
  */
 abstract class Tree extends AbsNode with JSONView:
-    import scala.language.postfixOps
     val children : mutable.ListBuffer[Tree | LeafNode] = mutable.ListBuffer[Tree | LeafNode]()
 

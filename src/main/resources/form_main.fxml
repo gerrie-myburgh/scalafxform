@@ -55,7 +55,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#onNewFormClick" text="Show Form" />
                   <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#onJarOpenClick" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
+            <Menu fx:id="mnuRecent" mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#onSaveClick" text="Save" />
             <MenuItem mnemonicParsing="false" onAction="#onSaveAsClick" text="Save As…" />
