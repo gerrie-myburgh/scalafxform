@@ -13,7 +13,7 @@ import org.json.JSONObject
  * Group of nodes and the constrains that they are subjected to
  */
 case class ControlGroup(
-                        val control : mutable.ArrayBuffer[Node | ControlGroup] = mutable.ArrayBuffer[Node | ControlGroup]() 
+                        val control : mutable.ArrayBuffer[MV] = mutable.ArrayBuffer[MV]() 
                         )
 
 

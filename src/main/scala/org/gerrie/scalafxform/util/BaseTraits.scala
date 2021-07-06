@@ -48,7 +48,7 @@ trait FormVM extends VM:
  */
 trait TreePane:
     /** 
-     * add node with parameters to tbe pane
+     * add node with parameters to the pane
      */
     def add(c : Node, param : String) : Unit
     /** 
@@ -84,7 +84,7 @@ trait LeafComponent extends LeafNode:
  */
 trait MV:
     def getControl() : List[Node]
-
+    def addTo(pane : TreePane, viewModel : LeafComponent) : Unit
 /******************************************************************************
  * logger trait
  * https://stackoverflow.com/questions/2018528/logging-in-scala

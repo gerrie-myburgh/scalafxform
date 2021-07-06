@@ -36,15 +36,4 @@ class TestLayout:
      * Load structure and try out Layout structure.
      */
     @Test def test1() =
-        Load.load("test1", Const.jsonOk)
-        val vmName = "test1" // i
-
-        val controlGroup = ControlGroup() // i
-        controlGroup.control += Label("label")
-        val controlGroup1 = ControlGroup() // i
-        controlGroup1.control += TextField("field")
-        val controls = Map("field" -> mutable.ArrayBuffer(controlGroup), "label" -> mutable.ArrayBuffer(controlGroup1)) // i
-        val parentNode = Layout.format(vmName, controls)
-
-        // there should only be 3 nodes as children of the parent pane
-        assertEquals("There should only be 3 child nodes.", 3, parentNode.getChildren().size)
+        ()

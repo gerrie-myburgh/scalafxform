@@ -71,8 +71,7 @@ object Layout extends Logs:
 
                 c.foreach(controls =>
                     controls.control.foreach(control =>
-                        if control.isInstanceOf[Node] then
-                            pane.add(control.asInstanceOf[Node], viewModel.getLayout())
+                            control.addTo(pane, viewModel)
                     )
                 )
             else

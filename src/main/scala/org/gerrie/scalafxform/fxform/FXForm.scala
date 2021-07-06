@@ -73,7 +73,7 @@ case class FXForm[T](model : T) extends Logs:
                     val prop = themodel.asInstanceOf[MV]
                     val fieldControl = ControlGroup()
 
-                    fieldControl.control ++= prop.getControl()
+                    fieldControl.control += prop
                     val controls = mutable.ArrayBuffer[ControlGroup] ()
                     controls += fieldControl
                     fieldControls += name -> controls

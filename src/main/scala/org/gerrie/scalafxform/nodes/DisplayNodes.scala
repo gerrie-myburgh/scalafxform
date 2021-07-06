@@ -45,6 +45,12 @@ class DisplayTree() extends MV:
     var dirty                                       = false
 
     /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(tree, viewModel.getLayout())
+
+    /************************************************************************** 
      * add change listmer to tree. In this case the listner will display the
      * associated form iff the detail pane is defined
      */ 
@@ -346,6 +352,12 @@ class DisplayList[T <: VM]() extends MV:
     private var mode = ListStatus.READ
 
     /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(table, viewModel.getLayout())
+        
+    /************************************************************************** 
      * constructor.
      * The table in this case is places on an AnchorPane. This classbacks is
      * then set to local methods. They are
@@ -515,6 +527,12 @@ class DisplayText() extends MV:
     private val prop = SimpleStringProperty()
 
     /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(control, viewModel.getLayout())
+        
+    /************************************************************************** 
      * constructor
      */
     def this(default : String) =
@@ -552,6 +570,12 @@ class DisplayComboBox[T]() extends MV:
     private val control = ComboBox[T]()
     private val prop = SimpleObjectProperty[T]()
 
+    /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(control, viewModel.getLayout())
+        
     /************************************************************************** 
      * constructor
      */
@@ -598,6 +622,12 @@ class DisplayBoolean() extends MV:
     private val prop = SimpleBooleanProperty()
 
     /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(control, viewModel.getLayout())
+        
+    /************************************************************************** 
      * constructor
      */
     def this(default : Boolean) =
@@ -633,6 +663,12 @@ class DisplayRadioButton() extends MV:
     private val prop    = SimpleBooleanProperty()
 
     /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(control, viewModel.getLayout())
+        
+    /************************************************************************** 
      * constructor
      */
     def this(default : Boolean) =
@@ -652,6 +688,14 @@ class DisplayRadioGroup[T]() extends MV:
     private val toggleGroup = ToggleGroup()
     private val prop        = SimpleBooleanProperty()
 
+    /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        controlList.foreach(control =>
+            pane.add(control, viewModel.getLayout())
+        )
+        
     /************************************************************************** 
      * constructor
      */
@@ -705,6 +749,12 @@ class DisplayLabel() extends  MV:
     private val control = Label()
 
     /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(control, viewModel.getLayout())
+        
+    /************************************************************************** 
      * constructor
      */
     def this(default : String) =
@@ -734,6 +784,12 @@ class DisplayLabel() extends  MV:
 class DisplayDatePicker() extends  MV:
     private val control = DatePicker()
 
+    /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(control, viewModel.getLayout())
+        
     /************************************************************************** 
      * constructor
      */
@@ -765,6 +821,12 @@ class DisplayDatePicker() extends  MV:
 class DisplayButton() extends  MV:
     private val control = Button("NO LABEL ASSIGNED")
 
+    /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        pane.add(control, viewModel.getLayout())
+        
     /************************************************************************** 
      * constructor
      */
