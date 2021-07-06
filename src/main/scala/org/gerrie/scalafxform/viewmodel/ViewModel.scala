@@ -161,3 +161,27 @@ class DisplayLabelVM extends VM:
         aCopy.field.set( field.get() )
         aCopy.layout.set( layout.get() )
         aCopy
+/******************************************************************************
+ * DatePicker formVM, used to display/edit values associated with a DatePicker
+ */ 
+class DisplayDatePickerVM extends FormVM:
+    override def getFieldName() = field.get()
+
+    def makeCopy()= 
+        val aCopy = DisplayLabelVM()
+        aCopy.field.set( field.get() )
+        aCopy.layout.set( layout.get() )
+        aCopy
+/******************************************************************************
+ * Button formVM, used to display/edit values associated with a Button
+ * //TODO the label must be on top of the button NOT next to it..
+ */ 
+class DisplayButtonVM extends FormVM:
+    override def getFieldName() = field.get()
+
+    def makeCopy()= 
+        val aCopy = DisplayButtonVM()
+        aCopy.label.set( label.get() )
+        aCopy.field.set( field.get() )
+        aCopy.layout.set( layout.get() )
+        aCopy

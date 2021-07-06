@@ -70,7 +70,7 @@ object Load extends Logs:
                 error(msg)
                 throw Exception(msg)
         catch
-            case e : Exception => info(s"File $file does not exist")
+            case e : Exception => info(s"${e.printStackTrace()}")
 
     /******************************************************************************
      * Load JSON view definition where the viewName is loaded from the 

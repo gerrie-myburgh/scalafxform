@@ -1,0 +1,30 @@
+{
+    "node": {
+        "type": "MIGLAYOUT",
+        "label": "Test",
+        "layout": " :: :: ",
+        "children": [
+            {
+                "DisplayLabel": {
+                    "label": "Field",
+                    "field": "field",
+                    "layout": "wrap"
+                }
+            },
+            {
+                "DisplayText": {
+                    "label": "Label",
+                    "field": "label",
+                    "layout": "wrap:: :: "
+                }
+            },
+            {
+                "DisplayText": {
+                    "label": "MIG Layout",
+                    "field": "layout",
+                    "layout": " :: :: "
+                }
+            }
+        ]
+    }
+}

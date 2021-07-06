@@ -483,3 +483,96 @@ case class DisplayComponentTreeView() extends LeafComponent():
      */ 
     override def toString() = s"Component MV Tree"
 
+/****************************************************************************** 
+ */
+case class DisplayDatePickerView() extends LeafComponent():
+    /************************************************************************** 
+     * get label value from tree node detail form
+     */ 
+    def getLabel() = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayDatePickerVM].label.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * get field value from tree node detail form
+     */ 
+    def getField()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayDatePickerVM].field.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * Get Layout
+     */ 
+    def getLayout()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayDatePickerVM].layout.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * load values from JSON string
+     */ 
+    def toJSONStr()= s"""{"DisplayDatePicker":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}"}}"""
+    /************************************************************************** 
+     * save value to JSON string
+     */ 
+    def fromJSON(json : JSONObject) = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayDatePickerVM].label.set( json.getString("label") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayDatePickerVM].field.set( json.getString("field") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayDatePickerVM].layout.set( json.getString("layout") )
+    /************************************************************************** 
+     *
+     */ 
+    override def toString() = s"${getField()} : $formBeanName"
+
+/****************************************************************************** 
+ */
+case class DisplayButtonView() extends LeafComponent():
+    /************************************************************************** 
+     * get label value from tree node detail form
+     */ 
+    def getLabel() = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].label.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * get field value from tree node detail form
+     */ 
+    def getField()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].field.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * Get Layout
+     */ 
+    def getLayout()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].layout.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * load values from JSON string
+     */ 
+    def toJSONStr()= s"""{"DisplayButton":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}"}}"""
+    /************************************************************************** 
+     * save value to JSON string
+     */ 
+    def fromJSON(json : JSONObject) = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].label.set( json.getString("label") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].field.set( json.getString("field") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].layout.set( json.getString("layout") )
+    /************************************************************************** 
+     *
+     */ 
+    override def toString() = s"${getField()} : $formBeanName"

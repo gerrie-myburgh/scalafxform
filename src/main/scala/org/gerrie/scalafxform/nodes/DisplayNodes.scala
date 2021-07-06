@@ -27,6 +27,7 @@ import controller.*
 
 import org.json.JSONObject
 import scala.annotation.meta.beanSetter
+import java.time.LocalDate
 
 /******************************************************************************
  * The following classes are all wrappers for display components
@@ -727,3 +728,62 @@ class DisplayLabel() extends  MV:
      */
     def get() =
         control.getText()
+/******************************************************************************
+ * display label
+ */
+class DisplayDatePicker() extends  MV:
+    private val control = DatePicker()
+
+    /************************************************************************** 
+     * constructor
+     */
+    def this(default : String) =
+        this()
+        set(LocalDate.now())
+
+    /************************************************************************** 
+     * get all controlls
+     */
+    def getControl() : List[Control] =
+        List(control)
+
+    /************************************************************************** 
+     * Set value of control
+     */
+    def set(value : LocalDate) =
+        control.setValue(value)//  setText(value)
+
+    /************************************************************************** 
+     * Get value of control
+     */
+    def get() =
+        control.getValue()
+
+/******************************************************************************
+ * display button
+ */
+class DisplayButton() extends  MV:
+    private val control = Button("NO LABEL ASSIGNED")
+
+    /************************************************************************** 
+     * constructor
+     */
+    def this(default : String) =
+        this()
+
+    /************************************************************************** 
+     * get all controlls
+     */
+    def getControl() : List[Control] =
+        List(control)
+
+    /************************************************************************** 
+     * Set value of control
+     */
+    def set(value : LocalDate) =
+        ()
+    /************************************************************************** 
+     * Get value of control
+     */
+    def get() =
+        ()
