@@ -11,6 +11,7 @@ import javafx.scene.layout.*
 import javafx.scene.text.Text;
 import javafx.scene.input.*
 import javafx.beans.value.*
+import javafx.event.*
 
 import org.gerrie.scalafxform.util.*
 import org.gerrie.scalafxform.layout.*
@@ -48,7 +49,14 @@ class DisplayTree() extends MV:
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
-        pane.add(tree, viewModel.getLayout())
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayTreeVM]
+            if !model.label.get().isEmpty then
+                pane.add(Label(model.label.get()), "")
+        if control != null then
+            pane.add(control, viewModel.getLayout())
+        else
+            pane.add(tree, viewModel.getLayout())
 
     /************************************************************************** 
      * add change listmer to tree. In this case the listner will display the
@@ -133,7 +141,7 @@ class DisplayTree() extends MV:
                 val fieldName = theChild.treeNodeDetailForm.get.getFieldName()
 
                 val newTreeItem = getTreeItem(fieldName, theChild)
-                // TODO ERROR - treeNodeDetailForm now have mo loaded detail. theChild have the detail in it.
+                
                 newTreeItem.getValue().treeNodeDetailForm.get.asInstanceOf[FormVM].copy(theChild.treeNodeDetailForm.get.asInstanceOf[FormVM])
                 newTreeItem.getValue().treeNodeDetailForm = newTreeItem.getValue().treeNodeDetailForm
 
@@ -355,6 +363,10 @@ class DisplayList[T <: VM]() extends MV:
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayListVM]
+            if !model.label.get().isEmpty then
+                pane.add(Label(model.label.get()), "")
         pane.add(table, viewModel.getLayout())
         
     /************************************************************************** 
@@ -530,6 +542,10 @@ class DisplayText() extends MV:
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayTextVM]
+            if !model.label.get().isEmpty then
+                pane.add(Label(model.label.get()), "")
         pane.add(control, viewModel.getLayout())
         
     /************************************************************************** 
@@ -574,6 +590,10 @@ class DisplayComboBox[T]() extends MV:
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayComboBoxVM]
+            if !model.label.get().isEmpty then
+                pane.add(Label(model.label.get()), "")
         pane.add(control, viewModel.getLayout())
         
     /************************************************************************** 
@@ -625,6 +645,10 @@ class DisplayBoolean() extends MV:
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayBooleanVM]
+            if !model.label.get().isEmpty then
+                pane.add(Label(model.label.get()), "")
         pane.add(control, viewModel.getLayout())
         
     /************************************************************************** 
@@ -692,6 +716,10 @@ class DisplayRadioGroup[T]() extends MV:
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayRadioGroupVM]
+            if !model.label.get().isEmpty then
+                pane.add(Label(model.label.get()), "")
         controlList.foreach(control =>
             pane.add(control, viewModel.getLayout())
         )
@@ -788,6 +816,10 @@ class DisplayDatePicker() extends  MV:
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayDatePickerVM]
+            if !model.label.get().isEmpty then
+                pane.add(Label(model.label.get()), "")
         pane.add(control, viewModel.getLayout())
         
     /************************************************************************** 
@@ -815,16 +847,24 @@ class DisplayDatePicker() extends  MV:
     def get() =
         control.getValue()
 
-/******************************************************************************
+/****************************************************************************** 
  * display button
  */
 class DisplayButton() extends  MV:
     private val control = Button("NO LABEL ASSIGNED")
+    private var actionEvent : Option[(event : ActionEvent) => Unit] = None
 
+    control.setOnAction(e =>
+        if actionEvent.isDefined then
+            actionEvent.get(e)
+    )
     /************************************************************************** 
      * Add component to pane
      */
     override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM]
+            control.setText(model.label.get())
         pane.add(control, viewModel.getLayout())
         
     /************************************************************************** 
@@ -842,10 +882,5 @@ class DisplayButton() extends  MV:
     /************************************************************************** 
      * Set value of control
      */
-    def set(value : LocalDate) =
-        ()
-    /************************************************************************** 
-     * Get value of control
-     */
-    def get() =
-        ()
+    def set(action :  Option[(event : ActionEvent) => Unit]) =
+        actionEvent = action

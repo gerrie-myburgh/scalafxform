@@ -174,7 +174,6 @@ class DisplayDatePickerVM extends FormVM:
         aCopy
 /******************************************************************************
  * Button formVM, used to display/edit values associated with a Button
- * //TODO the label must be on top of the button NOT next to it..
  */ 
 class DisplayButtonVM extends FormVM:
     override def getFieldName() = field.get()

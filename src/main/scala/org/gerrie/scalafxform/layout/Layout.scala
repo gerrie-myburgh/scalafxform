@@ -60,9 +60,6 @@ object Layout extends Logs:
          * place the controls on the given pane
          */
         def formatControl(viewModel : LeafComponent, pane : TreePane) =
-            if !viewModel.getLabel().isEmpty  then 
-                info(s"Add label to pane ${viewModel.formBeanName}.")
-                pane.add(Label(viewModel.getLabel()),"")
 
             if controls.contains(viewModel.getField()) then
                 val c = controls(viewModel.getField())
