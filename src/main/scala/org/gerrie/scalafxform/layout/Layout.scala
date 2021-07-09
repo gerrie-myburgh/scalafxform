@@ -68,7 +68,7 @@ object Layout extends Logs:
 
                 c.foreach(controls =>
                     controls.control.foreach(control =>
-                            control.addTo(pane, viewModel)
+                        control.addTo(pane, viewModel)
                     )
                 )
             else

@@ -52,6 +52,10 @@ class DisplayTreeVM extends FormVM:
         aCopy.layout.set( layout.get() )
         aCopy
 
+/******************************************************************************
+ * Radion button group formVM, used to display/edit values associated 
+ * with group of radio buttons
+ */ 
 class DisplayRadioGroupVM extends FormVM:
     override def getFieldName() = field.get()
 
@@ -75,6 +79,9 @@ class DisplayRadioVM extends FormVM:
         aCopy.layout.set( layout.get() )
         aCopy
 
+/******************************************************************************
+ * Checkbox formVM, used to display/edit values associated with boolean value
+ */ 
 class DisplayBooleanVM extends FormVM:
     override def getFieldName() = field.get()
 
@@ -90,14 +97,21 @@ class DisplayBooleanVM extends FormVM:
  */ 
 class DisplayTextVM extends FormVM:
     override def getFieldName() = field.get()
+    val validateREGEX = DisplayText("")
+    val errString     = DisplayText("")
 
     def makeCopy()= 
         val aCopy = DisplayTextVM()
+        aCopy.validateREGEX.set( validateREGEX.get() )
+        aCopy.errString.set( errString.get() )
         aCopy.label.set( label.get() )
         aCopy.field.set( field.get() )
         aCopy.layout.set( layout.get() )
         aCopy
 
+/******************************************************************************
+ * List formVM, used to display/edit values associated with List
+ */ 
 class DisplayListVM extends FormVM:
     override def getFieldName() = field.get()
 
@@ -180,6 +194,23 @@ class DisplayButtonVM extends FormVM:
 
     def makeCopy()= 
         val aCopy = DisplayButtonVM()
+        aCopy.label.set( label.get() )
+        aCopy.field.set( field.get() )
+        aCopy.layout.set( layout.get() )
+        aCopy
+
+/******************************************************************************
+ * HTML formVM, used to display/edit values associated with a Button
+ */ 
+class DisplayHTMLEditorVM extends FormVM:
+    override def getFieldName() = field.get()
+    val prefWidth = DisplayText("506")
+    val prefHeight = DisplayText("200")
+
+    def makeCopy()= 
+        val aCopy = DisplayHTMLEditorVM()
+        aCopy.prefWidth.set( prefWidth.get() )
+        aCopy.prefHeight.set( prefHeight.get() )
         aCopy.label.set( label.get() )
         aCopy.field.set( field.get() )
         aCopy.layout.set( layout.get() )

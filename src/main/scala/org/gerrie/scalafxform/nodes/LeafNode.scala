@@ -292,6 +292,7 @@ case class DisplayTextView() extends LeafComponent():
 
     /************************************************************************** 
      * load values from JSON string
+    * // TODO expane this to include reg exp and error fields
      */ 
     def toJSONStr()= s"""{"DisplayText":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}"}}"""
     /************************************************************************** 
@@ -572,6 +573,53 @@ case class DisplayButtonView() extends LeafComponent():
             treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].label.set( json.getString("label") )
             treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].field.set( json.getString("field") )
             treeNodeDetailForm.get.asInstanceOf[DisplayButtonVM].layout.set( json.getString("layout") )
+    /************************************************************************** 
+     *
+     */ 
+    override def toString() = s"${getField()} : $formBeanName"
+/****************************************************************************** 
+ */
+case class DisplayHTMLEditorView() extends LeafComponent():
+    /************************************************************************** 
+     * get label value from tree node detail form
+     */ 
+    def getLabel() = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].label.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * get field value from tree node detail form
+     */ 
+    def getField()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].field.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * Get Layout
+     */ 
+    def getLayout()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].layout.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * load values from JSON string
+     * // TODO expane this to include width and height fields
+     */ 
+    def toJSONStr()= s"""{"DisplayHTMLEditor":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}"}}"""
+    /************************************************************************** 
+     * save value to JSON string
+     */ 
+    def fromJSON(json : JSONObject) = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].label.set( json.getString("label") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].field.set( json.getString("field") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].layout.set( json.getString("layout") )
     /************************************************************************** 
      *
      */ 

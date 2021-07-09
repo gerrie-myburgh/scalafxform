@@ -29,6 +29,7 @@ import controller.*
 import org.json.JSONObject
 import scala.annotation.meta.beanSetter
 import java.time.LocalDate
+import javafx.scene.web.HTMLEditor
 
 /******************************************************************************
  * The following classes are all wrappers for display components
@@ -538,6 +539,14 @@ class DisplayText() extends MV:
     private val control = TextField()
     private val prop = SimpleStringProperty()
 
+    private var validateREGEX : Option[String] = None
+    private var errorString = ""
+
+    control.focusedProperty().addListener((arg0, oldValue, newValue) => {
+        if newValue != null && validateREGEX.isDefined then  // when focus lost
+                if !control.getText().matches(validateREGEX.get) then
+                    control.setText(errorString);
+        });    
     /************************************************************************** 
      * Add component to pane
      */
@@ -546,6 +555,10 @@ class DisplayText() extends MV:
             val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayTextVM]
             if !model.label.get().isEmpty then
                 pane.add(Label(model.label.get()), "")
+            if model.validateREGEX.get() != null && !model.validateREGEX.get().isEmpty() then
+                validateREGEX = Some(model.validateREGEX.get()) 
+            if model.errString.get() != null && !model.errString.get().isEmpty() then
+                errorString = model.errString.get()
         pane.add(control, viewModel.getLayout())
         
     /************************************************************************** 
@@ -567,6 +580,13 @@ class DisplayText() extends MV:
      */
     def set(name : String) =
         prop.setValue(name)
+
+    /************************************************************************** 
+     * Set validation of control
+     */
+    def set(regex : String, err : String) =
+        validateREGEX = Some(regex)
+        errorString = err
 
     /************************************************************************** 
      * Get value of control
@@ -720,6 +740,7 @@ class DisplayRadioGroup[T]() extends MV:
             val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayRadioGroupVM]
             if !model.label.get().isEmpty then
                 pane.add(Label(model.label.get()), "")
+                
         controlList.foreach(control =>
             pane.add(control, viewModel.getLayout())
         )
@@ -884,3 +905,44 @@ class DisplayButton() extends  MV:
      */
     def set(action :  Option[(event : ActionEvent) => Unit]) =
         actionEvent = action
+/****************************************************************************** 
+ * display button
+ */
+class DisplayHTMLEditor() extends  MV:
+    private val control = HTMLEditor()
+
+    control.setPrefWidth(506)
+    control.setPrefHeight(200)
+
+    /************************************************************************** 
+     * Add component to pane
+     */
+    override def addTo(pane : TreePane, viewModel : LeafComponent) = 
+        if viewModel.treeNodeDetailForm.isDefined then 
+            val model = viewModel.treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM]
+            pane.add(Label(model.label.get()), "")
+        pane.add(control, viewModel.getLayout())
+        
+    /************************************************************************** 
+     * constructor
+     */
+    def this(default : String) =
+        this()
+
+    /************************************************************************** 
+     * get all controlls
+     */
+    def getControl() : List[Control] =
+        List(control)
+
+    /************************************************************************** 
+     * Get value of control
+     */
+    def get() =
+        control.getHtmlText()
+
+    /************************************************************************** 
+     * Set value of control
+     */
+    def set(value : String) =
+        control.setHtmlText(value)

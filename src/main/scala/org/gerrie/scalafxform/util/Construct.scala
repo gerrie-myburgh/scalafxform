@@ -46,7 +46,8 @@ object Construct:
         "DisplayComboBox" ->     {() => DisplayComboBoxView()},
         "DisplayTo" ->           {() => DisplayTOVMMapView()},
         "ComponentDisplayTree" ->{() => DisplayComponentTreeView()},
-        "DisplayLabel" ->        {() => DisplayLabelView()}
+        "DisplayLabel" ->        {() => DisplayLabelView()},
+        "DisplayHTMLEditor" ->   {() => DisplayHTMLEditorView()}
     )
 
     /******************************************************************************
@@ -77,5 +78,6 @@ object Construct:
         "org.gerrie.scalafxform.viewmodel.MVToVMMap.view.json",
         "org.gerrie.scalafxform.viewmodel.DisplayTreeViewComponentsVM.view.json",
         "org.gerrie.scalafxform.viewmodel.DisplayTreeViewNodeVM.view.json",
-        "org.gerrie.scalafxform.viewmodel.DisplayListVM.view.json"
+        "org.gerrie.scalafxform.viewmodel.DisplayListVM.view.json",
+        "org.gerrie.scalafxform.viewmodel.DisplayHTMLEditorVM.view.json",
     )

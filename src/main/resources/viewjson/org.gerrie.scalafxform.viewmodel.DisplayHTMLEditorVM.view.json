@@ -20,16 +20,16 @@
             },
             {
                 "DisplayText": {
-                    "label": "Validation REGEX",
-                    "field": "validateREGEX",
-                    "layout": "wrap:: :: "
+                    "label": "Prefered Width",
+                    "field": "prefWidth",
+                    "layout": "wrap 2:: :: "
                 }
             },
             {
                 "DisplayText": {
-                    "label": "Error Message",
-                    "field": "errString",
-                    "layout": "wrap:: :: "
+                    "label": "Prefered Height",
+                    "field": "prefHeight",
+                    "layout": "wrap 2:: :: "
                 }
             },
             {
