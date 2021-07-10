@@ -74,6 +74,7 @@ object RunConfig:
             prop.load(input)
             val fileNames = prop.getProperty("files.recent")
             fileNames
-            .split(",")    
+            .split(",")
+            .filter(s => s.length > 0)    
             .foreach(fileName => addFileNameLoaded(fileName, menu, action))
         } 
