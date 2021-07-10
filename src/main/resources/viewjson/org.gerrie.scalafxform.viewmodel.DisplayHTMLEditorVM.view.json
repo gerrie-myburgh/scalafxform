@@ -13,6 +13,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "Label",
                     "field": "label",
                     "layout": "wrap:: :: "
@@ -20,6 +22,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "[0-9]+",
+                    "errString": "Positive Integer Expected",
                     "label": "Prefered Width",
                     "field": "prefWidth",
                     "layout": "wrap 2:: :: "
@@ -27,6 +31,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "[0-9]+",
+                    "errString": "Positive Integer Expected",
                     "label": "Prefered Height",
                     "field": "prefHeight",
                     "layout": "wrap 2:: :: "
@@ -34,6 +40,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "MIG Layout",
                     "field": "layout",
                     "layout": " :: :: "

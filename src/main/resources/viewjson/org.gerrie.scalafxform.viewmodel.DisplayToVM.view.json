@@ -5,21 +5,21 @@
         "layout":" :: :: ",
         "children": [
             {
-                "DisplayText": {
+                "DisplayText": {"validateREGEX":"","errString":"",
                     "label": "View",
                     "field": "view",
                     "layout":" :: :: "
                 }
             },
             {
-                "DisplayText": {
+                "DisplayText": {"validateREGEX":"","errString":"",
                     "label": "View Model",
                     "field": "vm",
                     "layout":" :: :: "
                 }
             },
             {
-                "DisplayText": {
+                "DisplayText": {"validateREGEX":"","errString":"",
                     "label": "MIG Layout",
                     "field": "layout",
                     "layout": " :: :: "

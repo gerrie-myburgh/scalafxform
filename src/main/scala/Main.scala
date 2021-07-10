@@ -3,9 +3,9 @@ import org.gerrie.scalafxform.fxform.*
 import javafx.beans.property.*
 import javafx.application.*
 
-import javafx.fxml._
-import javafx.scene._
-import javafx.stage._
+import javafx.fxml.*
+import javafx.scene.*
+import javafx.stage.*
 
 import org.gerrie.scalafxform.layout.*
 import org.gerrie.scalafxform.util.*

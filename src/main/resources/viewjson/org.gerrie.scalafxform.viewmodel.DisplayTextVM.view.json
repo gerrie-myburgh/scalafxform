@@ -13,6 +13,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "Label",
                     "field": "label",
                     "layout": "wrap:: :: "
@@ -20,6 +22,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "Validation REGEX",
                     "field": "validateREGEX",
                     "layout": "wrap:: :: "
@@ -27,6 +31,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "Error Message",
                     "field": "errString",
                     "layout": "wrap:: :: "
@@ -34,6 +40,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "MIG Layout",
                     "field": "layout",
                     "layout": " :: :: "

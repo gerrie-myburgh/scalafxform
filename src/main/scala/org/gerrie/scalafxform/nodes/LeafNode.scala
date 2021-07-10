@@ -290,16 +290,37 @@ case class DisplayTextView() extends LeafComponent():
         else
             "undefined treeNodeDetailForm"
 
+
+    /************************************************************************** 
+     * Get REGEX
+     */ 
+    def getValidateREGEX()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].validateREGEX.get()
+        else
+            "undefined treeNodeDetailForm"
+
+
+    /************************************************************************** 
+     * Get err string
+     */ 
+    def getErrString()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].errString.get()
+        else
+            "undefined treeNodeDetailForm"
+
     /************************************************************************** 
      * load values from JSON string
-    * // TODO expane this to include reg exp and error fields
      */ 
-    def toJSONStr()= s"""{"DisplayText":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}"}}"""
+    def toJSONStr()= s"""{"DisplayText":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}","validateREGEX":"${getValidateREGEX()}","errString":"${getErrString()}"}}"""
     /************************************************************************** 
      * save value to JSON string
      */ 
     def fromJSON(json : JSONObject) = 
         if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].validateREGEX.set( json.getString("validateREGEX") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].errString.set( json.getString("errString") )
             treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].label.set( json.getString("label") )
             treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].field.set( json.getString("field") )
             treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].layout.set( json.getString("layout") )

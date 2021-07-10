@@ -2,24 +2,28 @@
     "node": {
         "type": "MIGLAYOUT",
         "label": "Test",
-        "layout":" :: :: ",
+        "layout": " :: :: ",
         "children": [
             {
                 "DisplayLabel": {
                     "label": "Field",
                     "field": "field",
-                    "layout":"wrap"
+                    "layout": "wrap"
                 }
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "Label",
                     "field": "label",
-                    "layout":"wrap:: :: "
+                    "layout": "wrap:: :: "
                 }
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "MIG Layout",
                     "field": "layout",
                     "layout": " :: :: "

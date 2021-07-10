@@ -13,6 +13,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "Label",
                     "field": "label",
                     "layout": " :: :: "
@@ -20,6 +22,8 @@
             },
             {
                 "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
                     "label": "MiG Layout",
                     "field": "layout",
                     "layout": " :: :: "

@@ -2,7 +2,7 @@
     "node": {
         "type": "MIGLAYOUT",
         "label": "Display to MAP",
-        "layout":" :: :: ",
+        "layout": " :: :: ",
         "children": [
             {
                 "DisplayTo": {

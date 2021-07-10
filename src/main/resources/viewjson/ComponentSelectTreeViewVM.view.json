@@ -2,29 +2,22 @@
     "node": {
         "type": "MIGLAYOUT",
         "label": "Test",
-        "layout":" :: :: ",
+        "layout": " :: :: ",
         "children": [
             {
-                "node": {
-                    "type": "COMPONENT",
-                    "label": "",
-                    "layout":" :: :: ",
-                    "children": [
-                        {
-                            "DisplayLabel": {
-                                "label": "Field",
-                                "field": "field",
-                                "layout":"wrap"
-                            }
-                        },
-                        {
-                            "DisplayText": {
-                                "label": "Label",
-                                "field": "label",
-                                "layout":" :: :: "
-                            }
-                        }
-                    ]
+                "DisplayLabel": {
+                    "label": "Field",
+                    "field": "field",
+                    "layout": "wrap"
+                }
+            },
+            {
+                "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
+                    "label": "Label",
+                    "field": "label",
+                    "layout": " :: :: "
                 }
             }
         ]
