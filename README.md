@@ -15,7 +15,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Models
 Note that the class definitions and descriptions do not necessarily correspond to the diagram. This is because the class definition are taken out of the packages and the diagrams are loosely based on the packages.
 
-These are notes for myself.
+These are notes for myself:
+1. At the moment a view.json file must exist for a javafx node hierarchy to be rendered. This is because the view file contains the metadata of what gets rendered where on the parent pane. **NB** look into default rendering, easiest will be defining an empty mig pane node and then have the default been empty , this will prevent the code from falling over when the view is not defined.
+2. Fixup the while config file issue. The view.json data location should be kept in the config file of the application that uses this library.
 
 ### Controller
 ![Controller Models](controller.jpg)  
