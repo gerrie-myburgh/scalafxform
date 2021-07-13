@@ -15,161 +15,89 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Models
 Note that the class definitions and descriptions do not necessarily correspond to the diagram. This is because the class definition are taken out of the packages and the diagrams are loosely based on the packages.
 
+These are notes for myself.
+
 ### Controller
 ![Controller Models](controller.jpg)  
-These are the JavaFX controllers used.  
-
-1. ControllerMain  
-The main controller that contain the ListVM, TreeVM and the tree detail forms panel. This is the controller for form_main.fxml.  
-
-2. ControllerDetail  
-This is the controller for form_detail.fxml. It is used to display view model detail in in a window if the detail panes are not defined.  
-
-3. ControllerTableView  
-This is the controller for form_tableview.fxml. It is used to display the TreeVM in the Tree in ControllerMain. 
+These are the JavaFX controllers used.  *NB* Be careful with the naming of the controllers fxml files in a project using this library. Name clashes can have unintended side effects that is only detected at runtime.
 
 ### Layout
 ![Layout](Layout.jpg)  
-1. RadioButtonGroup  
-A group of related radio buttons. This class ensures that the buttons all belong to the same ToggleGroup of buttons.
 
-2. CheckBoxGroup  
-Not used at the moment. It is supposed to be: A group of related checkboxes. When asked for the current value it should return a set it selected items.
+The layout package does the layout of the javafx nodes onto the mig pane. The way the nodes are ordered onto the mig pane is defined by a view json file. This is done using the Load object. The load object holds the roots of these tree definition in the views reference. The Layout object uses these tree definition to do the layout of the relevant class variables.
 
-3. Layout  
-Object that does the layout of the Nodes defined in the view models. 
+Radio buttons must be grouped as selecting one in the group must unselect the others in the group. Check Box Group is currently not used.
 
-4. Load  
-Object that loads the layout of the view models from json files.
+The json file content represents a Tree structure. This is modelled by AbsNode, Tree and LeafNode. Each AbsNode has a reference to the tree node detail form. This form holds the data loaded from the json file.
 
-5. MIGPane  
-The one and only pane that is used to add Nodes to.
-
-6. ControlGroup  
-A Group of controls. This references the relevant constraint and the list of nodes that is looks after.
-
-7. AbsNode  
-Root of a tree.This is the tree definition of the layout of view models
-
-8. LeafNode  
-Leaf node of a tree.
-
-9. Tree
-A Tree node. This node has children. A child can either be a Leaf node or Tree node.
+This is an example of the content of a json file.
+<pre>
+{
+    "node": {
+        "type": "MIGLAYOUT",
+        "label": "Test",
+        "layout": " :: :: ",
+        "children": [
+            {
+                "DisplayLabel": {
+                    "label": "Field",
+                    "field": "field",
+                    "layout": "wrap"
+                }
+            },
+            {
+                "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
+                    "label": "Label",
+                    "field": "label",
+                    "layout": "wrap:: :: "
+                }
+            },
+            {
+                "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
+                    "label": "MIG Layout",
+                    "field": "layout",
+                    "layout": " :: :: "
+                }
+            }
+        ]
+    }
+}
+</pre>
 
 ### Nodes
 ![Nodes](Nodes.jpg)  
-1. DisplayTree()  
-Display a basic TreeView.
+The MV (model View) classes are the actual view on the model to be displayed to the user on the mig pane. These hold the javafx components to be displayed. The Layout object will get the javafx component and ask it to render itself on the mig pane. 
 
-2. DisplayList()  
-Display a basic TableView.
-
-3. DisplayText()  
-Display Text component.
-
-4. DisplayComboBox()  
-Display ComboBox.
-
-5. DisplayBoolean()  
-Display CheckBox.
-
-6. DisplayRadioButton()  
-Display RadioButton.
-
-7. DisplayRadioGroup()  
-Display RadioButtonGroup.
-
-8. DisplayLabel()  
-Display Label
-
-9. DisplayLabelView()  
-Load and save the treeNodeDetailForm detail of the DisplayLabelVM in or from json file. Display the leaf node information on the tree via toString
-
-10. DisplayTreeView()  
-Load and save the treeNodeDetailForm detail of the DisplayTreeVM in or from json file. Display the leaf node information on the tree via toString
-
-11. DisplayRadioGroupView()  
-Load and save the treeNodeDetailForm detail of the DisplayRadioGroupVM in or from json file. Display the leaf node information on the tree via toString
-
-12. DisplayRadioView()  
-Load and save the treeNodeDetailForm detail of the DisplayRadioVM in or from json file. Display the leaf node information on the tree via toString
-
-13. DisplayBooleanView()  
-Load and save the treeNodeDetailForm detail of the DisplayBooleanVM in or from json file. Display the leaf node information on the tree via toString
-
-14. DisplayTextView()  
-Load and save the treeNodeDetailForm detail of the DisplayTextVM in or from json file. Display the leaf node information on the tree via toString
-
-15. DisplayListView()  
-Load and save the treeNodeDetailForm detail of the DisplayListVM in or from json file. Display the leaf node information on the tree via toString
-
-16. DisplayComboBoxView()  
-Load and save the treeNodeDetailForm detail of the DisplayComboBoxVM in or from json file. Display the leaf node information on the tree via toString
-
-17. DisplayTOVMMapView()  
-Load and save the treeNodeDetailForm detail of the DisplayTOVMMapVM in or from json file. Display the leaf node information on the tree via toString
-
-18. DisplayComponentTreeView()  
-Load and save the treeNodeDetailForm detail of the DisplayComponentTreeVM in or from json file. Display the leaf node information on the tree via toString
-
-19. TreeViewNodeView()  
-Load and save the treeNodeDetailForm detail of the TreeViewNodeVM in or from json file. Display the leaf node information on the tree via toString.
+The LeafComponents child classes contain the logic to load and save the VM (treeNodeDetailForm) content to and from the json file.
 
 ### ViewModel
 ![View Model](viewmodel.jpg)  
-All the view models in the library.
-
-1. DisplayTreeViewNodeVM  
-
-2. DisplayTreeVM  
-
-3. DisplayRadioGroupVM  
-
-4. DisplayRadioVM  
-
-5. DisplayBooleanVM  
-
-6. DisplayTextVM  
-
-7. DisplayListVM  
-
-8. DisplayComboBoxVM  
-
-9. DisplayToVM  
-
-10. DisplayComponentTreeVM  
-
-11. DisplayLabelVM  
+The VM (view models) are all forms representations that holds information loaded from the json file. This means that they are not the form itself only the meta data required to create the form. These classes also holds the information as defined by the json file. See above for an example of the json view file. In
+<pre>
+            {
+                "DisplayText": {
+                    "validateREGEX": "",
+                    "errString": "",
+                    "label": "MIG Layout",
+                    "field": "layout",
+                    "layout": " :: :: "
+                }
+            }
+</pre>
+The information loaded is the validateREGEX, errString, label, field and layout.
 
 ### ListVM
 ![List View Model](viewmodel.listvm.jpg)  
-1. Member  
-Members of the list
-
-2. DisplayMemberList  
-The list
-
-3. DisplayClassMembersListVM  
-Compound display of combo box and class members. The class member list is that of the class of the item selected in the combo box.
 
 ### TreeVM
 ![Tree View Model](viewmodel.treevm.jpg)  
-1. DisplayComponentTree  
-The tree view that is displaying the layout of the form.
-
-2. DisplayTreeViewComponentsVM
-Implements drag and drop (verify this).
 
 ## Current Version
 The current version is 0.0.0 dev
-
-## Dependencies
-1. Java 11
-2. JavaFX 11
-3. scala 3
-4. org.json.json
-5. com.miglayout.miglayout-javafx
 
 ## Usage
 This library is not ready for general usage.
