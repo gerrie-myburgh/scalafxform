@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory
 
 import scala.collection.*
 
-import controller.*
+import org.gerrie.scalafxform.controller.*
 
 import org.json.JSONObject
 import scala.annotation.meta.beanSetter

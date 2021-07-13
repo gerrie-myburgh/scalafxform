@@ -1,4 +1,4 @@
-package controller
+package org.gerrie.scalafxform.controller
 
 import java.net.URL
 import java.util.ResourceBundle
@@ -72,7 +72,7 @@ final case class ControllerMain():
     def onNewClick( event : ActionEvent )  =
         ()
 
-    def openJarFile( file : File ) : Unit =
+    def openJarFile( file : File ) : Unit = 
         if file != null then
             val pathToFile = Paths.get(file.getAbsolutePath()).getParent()
             // record as a recent opened file

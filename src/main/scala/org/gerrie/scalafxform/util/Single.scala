@@ -5,6 +5,9 @@ import javax.validation.Validation
 import javax.validation.constraints.* 
 import javafx.scene.control.* 
 import javafx.event.* 
+import javafx.fxml.*
+import javafx.scene.*
+import javafx.stage.*
 
 import scala.collection.*
 import scala.util.Using
@@ -12,6 +15,10 @@ import scala.util.Using
 import java.io.*
 import java.util.Properties
 import java.nio.file.*
+import javafx.stage.Stage
+
+import org.gerrie.scalafxform.layout.*
+import org.gerrie.scalafxform.controller.* 
 
 /******************************************************************************
  * Singleton containing constants
@@ -36,7 +43,7 @@ object RunConfig:
                     .getLocation() //.toURI
                     .getPath()
 
-    val configFilePath = """D:\Work\metals-dotty\scalafxform\src\main\resources\config.properties"""
+    var configFilePath = """D:\Work\metals-dotty\scalafxform\src\main\resources\config.properties"""
 
     /************************************************************************** 
      * add the file name that have been loaded to the list of names.
@@ -78,3 +85,18 @@ object RunConfig:
             .filter(s => s.length > 0)    
             .foreach(fileName => addFileNameLoaded(fileName, menu, action))
         } 
+
+object Form:
+    def showMain(stage : Stage) =
+        Load.loadViews(Construct.viewFileNames)
+
+        val loader = FXMLLoader()
+        loader.setLocation(getClass().getResource("/form_main.fxml"))
+        val root = loader.load().asInstanceOf[javafx.scene.layout.VBox]
+
+        val controller = loader.getController[org.gerrie.scalafxform.controller.ControllerMain]()
+        RunConfig.loadConfig(controller.mnuRecent, controller.openJarFile)
+
+        val scene = Scene(root)
+        stage.setScene(scene)
+        stage.show()               

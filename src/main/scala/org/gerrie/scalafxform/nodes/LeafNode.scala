@@ -324,6 +324,7 @@ case class DisplayTextView() extends LeafComponent():
             treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].label.set( json.getString("label") )
             treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].field.set( json.getString("field") )
             treeNodeDetailForm.get.asInstanceOf[DisplayTextVM].layout.set( json.getString("layout") )
+
     /************************************************************************** 
      *
      */ 
@@ -629,15 +630,35 @@ case class DisplayHTMLEditorView() extends LeafComponent():
             "undefined treeNodeDetailForm"
 
     /************************************************************************** 
-     * load values from JSON string
-     * // TODO expane this to include width and height fields
+     * Get width
      */ 
-    def toJSONStr()= s"""{"DisplayHTMLEditor":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}"}}"""
+    def getPrefWidth()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].prefWidth.get()
+        else
+            "undefined treeNodeDetailForm"
+
+    /************************************************************************** 
+     * Get height
+     */ 
+    def getPrefHeight()   = 
+        if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].prefHeight.get()
+        else
+            "undefined treeNodeDetailForm"
+
+
+    /************************************************************************** 
+     * load values from JSON string
+     */ 
+    def toJSONStr()= s"""{"DisplayHTMLEditor":{"label":"${getLabel()}", "field":"${getField()}","layout":"${getLayout()}", "prefHeight":"${getPrefHeight()}", "prefWidth":"${getPrefWidth()}"}}"""
     /************************************************************************** 
      * save value to JSON string
      */ 
     def fromJSON(json : JSONObject) = 
         if treeNodeDetailForm.isDefined then
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].prefHeight.set( json.getString("prefHeight") )
+            treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].prefWidth.set( json.getString("prefWidth") )
             treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].label.set( json.getString("label") )
             treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].field.set( json.getString("field") )
             treeNodeDetailForm.get.asInstanceOf[DisplayHTMLEditorVM].layout.set( json.getString("layout") )

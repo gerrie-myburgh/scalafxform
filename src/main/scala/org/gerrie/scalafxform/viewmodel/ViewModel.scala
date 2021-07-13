@@ -14,7 +14,7 @@ import javafx.util.*
 import javafx.beans.property.*
 
 
-import controller.*
+import org.gerrie.scalafxform.controller.*
 import javafx.collections.ObservableList
 import java.util.Observable
 import javafx.beans.value.ObservableObjectValue
@@ -36,7 +36,6 @@ class DisplayTreeViewNodeVM extends FormVM:
 
     override def copy(from : FormVM) =
         super.copy(from)
-        ()
 
 
 /******************************************************************************
@@ -109,6 +108,13 @@ class DisplayTextVM extends FormVM:
         aCopy.layout.set( layout.get() )
         aCopy
 
+    override def copy(from : FormVM) =
+        super.copy(from)
+        val f = from.asInstanceOf[DisplayTextVM]
+        validateREGEX.set(f.validateREGEX.get())
+        errString.set(f.errString.get())
+
+    
 /******************************************************************************
  * List formVM, used to display/edit values associated with List
  */ 
@@ -200,7 +206,7 @@ class DisplayButtonVM extends FormVM:
         aCopy
 
 /******************************************************************************
- * HTML formVM, used to display/edit values associated with a Button
+ * HTML formVM, used to display/edit values associated with a HTML Editor
  */ 
 class DisplayHTMLEditorVM extends FormVM:
     override def getFieldName() = field.get()
@@ -215,3 +221,9 @@ class DisplayHTMLEditorVM extends FormVM:
         aCopy.field.set( field.get() )
         aCopy.layout.set( layout.get() )
         aCopy
+
+    override def copy(from : FormVM) = 
+        super.copy(from)
+        val f = from.asInstanceOf[DisplayHTMLEditorVM]
+        prefWidth.set ( f.prefWidth.get() )
+        prefHeight.set ( f.prefHeight.get() )

@@ -31,7 +31,7 @@ object Load extends Logs:
      * Load all JSON view definitions from the resource folder
      */
     def loadViews(files : Array[String]) =
-        assert(files.size > 0)
+        assert(files.size > 0,s"There are no file names in the list")
 
         info(s"Load from list of file names.")
 
@@ -51,10 +51,33 @@ object Load extends Logs:
         )
 
     /******************************************************************************
+     * Load the json className definition from the directory path
+     */
+    def loadViews(path : String) =
+        assert(!path.isEmpty,s"path is empty")
+
+        val dir = Path.of(path)
+        val files = Files.list(dir)
+        files.forEach(path =>
+            val className = path.getFileName().toString().replace(".view.json","")
+            views.remove(className)
+            try
+                val jsonString = Files.readString(path)
+                if jsonString != null then
+                    load(className, jsonString)
+                else 
+                    val msg = s"${className}.view.json is empty."
+                    error(msg)
+                    throw Exception(msg)
+            catch
+                case e : Exception => info(s"${e.printStackTrace()}")
+        )
+        
+    /******************************************************************************
      * Load the json className definition for the file
      */
     def loadView(className : String, file : String) =
-        assert(!className.isEmpty && !file.isEmpty)
+        assert(!className.isEmpty && !file.isEmpty,s"Class Name or file Name is empty")
 
         info(s"Load ${className} from the file named ${file}.")
 
@@ -77,7 +100,7 @@ object Load extends Logs:
      * viewList json string definition
      */
     def load(viewName : String, jsonString : String) = 
-        assert(!viewName.isEmpty && !jsonString.isEmpty)
+        assert(!viewName.isEmpty && !jsonString.isEmpty, s"View name or Json string is empty")
 
         info(s"Load $viewName from the json string")
         /**

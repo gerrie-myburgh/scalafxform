@@ -14,7 +14,7 @@ import javafx.scene.text.*
 import javafx.util.*
 import javafx.beans.property.*
 
-import controller.*
+import org.gerrie.scalafxform.controller.*
 import javafx.collections.ObservableList
 import java.util.Observable
 import javafx.beans.value.ObservableObjectValue
