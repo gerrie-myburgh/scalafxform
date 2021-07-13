@@ -1,12 +1,13 @@
 package org.gerrie.scalafxform.controller
 
-import java.net.URL
-import java.util.ResourceBundle
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.scene.layout.*
 import javafx.scene.*
+import javafx.scene.layout.*
 import javafx.stage.*
+
+import java.net.URL
+import java.util.ResourceBundle
 
 final case class ControllerTableView():
 

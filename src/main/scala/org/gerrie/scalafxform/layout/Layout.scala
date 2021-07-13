@@ -1,20 +1,18 @@
 package org.gerrie.scalafxform.layout
 
-import scala.collection.*
-import javafx.scene.control.*
 import javafx.scene.*
+import javafx.scene.control.*
 import javafx.scene.layout.*
-
-import org.json.JSONObject
-import org.json.JSONArray
-
-import scala.language.postfixOps
-import scala.io.Source
-import scala.collection.*
-
-import java.io.* 
 import org.gerrie.scalafxform.nodes.*
 import org.gerrie.scalafxform.util.*
+import org.json.JSONArray
+import org.json.JSONObject
+
+import java.io.*
+import scala.collection.*
+import scala.collection.*
+import scala.io.Source
+import scala.language.postfixOps
 
 /****************************************************************************** 
  * object that does layout of a view. 

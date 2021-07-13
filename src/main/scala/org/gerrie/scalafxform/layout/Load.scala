@@ -1,20 +1,18 @@
 package org.gerrie.scalafxform.layout
 
-import scala.collection.*
-import javafx.scene.control.*
 import javafx.scene.*
+import javafx.scene.control.*
 import javafx.scene.layout.*
-
-import org.json.*
-
-import scala.language.postfixOps
-import scala.io.Source
-import scala.collection.*
-
-import java.nio.file.*
-import java.net.* 
 import org.gerrie.scalafxform.nodes.*
 import org.gerrie.scalafxform.util.*
+import org.json.*
+
+import java.net.*
+import java.nio.file.*
+import scala.collection.*
+import scala.collection.*
+import scala.io.Source
+import scala.language.postfixOps
 
 /******************************************************************************
 * Load object that is used to load json view definitions from 

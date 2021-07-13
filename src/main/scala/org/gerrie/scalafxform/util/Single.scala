@@ -1,24 +1,22 @@
 package org.gerrie.scalafxform.util
 
-import javafx.scene.input.*
-import javax.validation.Validation
-import javax.validation.constraints.* 
-import javafx.scene.control.* 
-import javafx.event.* 
+import javafx.event.*
 import javafx.fxml.*
 import javafx.scene.*
+import javafx.scene.control.*
+import javafx.scene.input.*
+import javafx.stage.Stage
 import javafx.stage.*
-
-import scala.collection.*
-import scala.util.Using
+import org.gerrie.scalafxform.controller.*
+import org.gerrie.scalafxform.layout.*
 
 import java.io.*
-import java.util.Properties
 import java.nio.file.*
-import javafx.stage.Stage
-
-import org.gerrie.scalafxform.layout.*
-import org.gerrie.scalafxform.controller.* 
+import java.util.Properties
+import javax.validation.Validation
+import javax.validation.constraints.*
+import scala.collection.*
+import scala.util.Using 
 
 /******************************************************************************
  * Singleton containing constants

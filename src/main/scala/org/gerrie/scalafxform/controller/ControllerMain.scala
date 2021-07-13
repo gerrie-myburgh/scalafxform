@@ -1,40 +1,39 @@
 package org.gerrie.scalafxform.controller
 
-import java.net.URL
-import java.util.ResourceBundle
-import java.io.*
+import javafx.application._
+import javafx.beans.property.*
+import javafx.collections.*
 import javafx.event.ActionEvent
 import javafx.fxml.*
 import javafx.scene.*
-import javafx.scene.text.*
 import javafx.scene.control.*
-import javafx.stage.*
-import javafx.scene.paint.Color
-import javafx.scene.text.Font
-import javafx.scene.layout.*
-import javafx.collections.*
-import javafx.application._
-import javafx.beans.property.*
-import javafx.stage.Stage
 import javafx.scene.control.*
 import javafx.scene.input.*
+import javafx.scene.layout.*
+import javafx.scene.paint.Color
+import javafx.scene.text.Font
+import javafx.scene.text.*
+import javafx.stage.Stage
+import javafx.stage.*
 import javafx.util.*
-
-import scala.collection._
-import java.lang.annotation.{ElementType, Target}
-
 import org.gerrie.scalafxform.controller.*
-import org.gerrie.scalafxform.nodes.*
-import org.gerrie.scalafxform.layout.*
-import org.gerrie.scalafxform.util.*
 import org.gerrie.scalafxform.fxform.*
+import org.gerrie.scalafxform.layout.*
+import org.gerrie.scalafxform.nodes.*
+import org.gerrie.scalafxform.util.*
 import org.gerrie.scalafxform.viewmodel.*
 import org.gerrie.scalafxform.viewmodel.*
 
-import scala.beans.*
-import java.nio.file.*
-import java.util.jar.JarFile
+import java.io.*
+import java.lang.annotation.ElementType
+import java.lang.annotation.Target
+import java.net.URL
 import java.net.URLClassLoader
+import java.nio.file.*
+import java.util.ResourceBundle
+import java.util.jar.JarFile
+import scala.beans.*
+import scala.collection._
 
 final case class ControllerMain():
     val classMemberList = DisplayClassMembersListVM() 

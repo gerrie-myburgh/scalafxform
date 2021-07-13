@@ -1,14 +1,13 @@
 package org.gerrie.scalafxform.util
 
 import javafx.beans.*
+import javafx.scene.*
 import javafx.scene.control.*
 import javafx.scene.layout.*
-import javafx.scene.*
-import org.json.JSONObject
-import org.gerrie.scalafxform.nodes.*
+import org.apache.log4j.*
 import org.gerrie.scalafxform.layout.*
-
-import org.apache.log4j.* 
+import org.gerrie.scalafxform.nodes.*
+import org.json.JSONObject 
 
 /******************************************************************************
  * base of all constraits

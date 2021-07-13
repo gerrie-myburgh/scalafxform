@@ -1,8 +1,8 @@
 package org.gerrie.scalafxform.layout
 
-import javafx.scene.layout.*
-import javafx.scene.control.*
 import javafx.scene.Node
+import javafx.scene.control.*
+import javafx.scene.layout.*
 import org.gerrie.scalafxform.util.*
 
 /****************************************************************************** 

@@ -1,13 +1,13 @@
 package org.gerrie.scalafxform.layout
 
-import scala.collection.*
+import javafx.scene.*
+import javafx.scene.control.*
 import org.gerrie.scalafxform.nodes.*
 import org.gerrie.scalafxform.util.*
 import org.gerrie.scalafxform.viewmodel.*
-import javafx.scene.control.*
-import javafx.scene.*
-
 import org.json.JSONObject
+
+import scala.collection.*
 
 /******************************************************************************
  * Group of nodes and the constrains that they are subjected to

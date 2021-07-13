@@ -1,11 +1,10 @@
 package org.gerrie.scalafxform.layout
 
+import javafx.scene.*
 import javafx.scene.control.*
 import javafx.scene.layout.*
-import javafx.scene.*
-import org.tbee.javafx.scene.layout.*
-
 import org.gerrie.scalafxform.util.*
+import org.tbee.javafx.scene.layout.*
 
 /******************************************************************************
  * Load panes. The only pane type currently is the MigLayout pane

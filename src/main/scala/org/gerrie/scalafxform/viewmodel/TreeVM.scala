@@ -1,25 +1,24 @@
 package org.gerrie.scalafxform.viewmodel
 
-import org.gerrie.scalafxform.util.*
-import org.gerrie.scalafxform.nodes.*
-import org.gerrie.scalafxform.layout.*
-import org.gerrie.scalafxform.viewmodel.*
-import scala.collection.*
+import javafx.beans.property.*
+import javafx.beans.value.ObservableObjectValue
+import javafx.collections.ObservableList
+import javafx.scene.control.*
 import javafx.scene.control.*
 import javafx.scene.control.cell.*
-import scala.beans.*
-import javafx.scene.control.*
 import javafx.scene.input.*
 import javafx.scene.text.*
 import javafx.util.*
-import javafx.beans.property.*
-
 import org.gerrie.scalafxform.controller.*
-import javafx.collections.ObservableList
-import javafx.beans.value.ObservableObjectValue
+import org.gerrie.scalafxform.layout.*
+import org.gerrie.scalafxform.nodes.*
+import org.gerrie.scalafxform.util.*
+import org.gerrie.scalafxform.viewmodel.*
 import org.tbee.javafx.scene.layout.MigPane
-
 import org.tbee.javafx.scene.layout.*
+
+import scala.beans.*
+import scala.collection.*
 
 /**************************************************************************
  * Wrapper for the select tree

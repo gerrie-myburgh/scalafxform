@@ -1,11 +1,12 @@
 package org.gerrie.scalafxform.util
 
-import scala.collection.*
 import org.gerrie.scalafxform.layout.*
 import org.gerrie.scalafxform.nodes.*
 import org.gerrie.scalafxform.viewmodel.*
 import org.gerrie.scalafxform.viewmodel.*
 import org.gerrie.scalafxform.viewmodel.*
+
+import scala.collection.*
 
 /**********************************************************************************
  * object used to costruct instances if named classes

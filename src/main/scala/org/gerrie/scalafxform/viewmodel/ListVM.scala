@@ -1,25 +1,25 @@
 package org.gerrie.scalafxform.viewmodel
 
-import org.gerrie.scalafxform.util.*
-import org.gerrie.scalafxform.nodes.*
-import org.gerrie.scalafxform.layout.*
-import org.gerrie.scalafxform.viewmodel.*
-import scala.collection.*
+import javafx.beans.property.*
+import javafx.beans.value.ObservableObjectValue
+import javafx.collections.ObservableList
+import javafx.scene.control.Alert.AlertType
+import javafx.scene.control.*
 import javafx.scene.control.*
 import javafx.scene.control.cell.*
-import scala.beans.*
-import javafx.scene.control.*
 import javafx.scene.input.*
 import javafx.scene.text.*
 import javafx.util.*
-import javafx.beans.property.*
-
 import org.gerrie.scalafxform.controller.*
-import javafx.collections.ObservableList
-import java.util.Observable
-import javafx.beans.value.ObservableObjectValue
-import javafx.scene.control.Alert.AlertType
+import org.gerrie.scalafxform.layout.*
+import org.gerrie.scalafxform.nodes.*
+import org.gerrie.scalafxform.util.*
+import org.gerrie.scalafxform.viewmodel.*
+
 import java.lang.reflect.Field
+import java.util.Observable
+import scala.beans.*
+import scala.collection.*
 
 
 /******************************************************************************
